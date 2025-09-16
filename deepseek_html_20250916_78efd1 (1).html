@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfroSite - Création de Sites Web Sur Mesure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #2EC4B6;
+            --accent: #E71D36;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --grey: #6C757D;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header amélioré */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a4a 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section améliorée */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23ff6b35" width="50" height="50"/><rect fill="%232a2a4a" x="50" width="50" height="50"/><rect fill="%232a2a4a" y="50" width="50" height="50"/><rect fill="%23ff6b35" x="50" y="50" width="50" height="50"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite linear;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1.5s ease;
+            max-width: 700px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+            animation: fadeInUp 2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.6);
+        }
+        
+        /* Features amélioré */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--grey);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: height 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+        
+        /* Pricing amélioré (votre partie préférée) */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+        
+        .pricing::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(46, 196, 182, 0.1) 0%, transparent 70%);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .pricing-card.popular {
+            transform: scale(1.05);
+            z-index: 3;
+            border: 2px solid var(--primary);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+        
+        .pricing-card.popular::before {
+            content: 'POPULAIRE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-15px);
+        }
+        
+        .pricing-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+        
+        .price span {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--grey);
+            margin-left: 5px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 35px;
+        }
+        
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+        
+        /* FAQ amélioré */
+        .faq {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s, padding 0.5s;
+            background-color: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 25px;
+        }
+        
+        /* Contact amélioré */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .contact-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .google-form-container {
+            width: 100%;
+            height: 2938px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .google-form-container iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Footer amélioré */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a4a 100%);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 25px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+        
+        .footer-about p {
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2a2a4a;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+                margin: 30px 0;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-15px);
+            }
+            
+            .google-form-container {
+                height: 3200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.4s;
+                gap: 40px;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .price {
+                font-size: 2.8rem;
+            }
+            
+            .google-form-container {
+                height: 3500px;
+            }
+            
+            .floating-whatsapp {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Page specific styles */
+        .page {
+            display: none;
+            padding: 100px 0;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--grey);
+        }
+        
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-text h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="lig.jpg" alt="AfroSite Logo">
+                <h1>AfroSite</h1>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="menu">
+                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                    <li><a href="#services" class="nav-link">Services & Prix</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Accueil Page -->
+        <section id="accueil" class="page active">
+            <div class="hero">
+                <div class="container hero-content">
+                    <h2>Création de Sites Web Sur Mesure</h2>
+                    <p>Des sites web professionnels, modernes et adaptés à vos besoins. Payez seulement après satisfaction!</p>
+                    <a href="#contact" class="btn">Je veux un site web <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Pourquoi choisir AfroSite?</h2>
+                        <p>Nous offrons des solutions web complètes et personnalisées pour booster votre présence en ligne</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Design Moderne & Responsive</h3>
+                            <p>Votre site sera visible et magnifique sur tous les appareils: téléphone, tablette et ordinateur.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <h3>Tarifs Accessibles</h3>
+                            <p>Des prix adaptés à tous les budgets, à partir de 10 000 FCFA seulement.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3>Hébergement Gratuit</h3>
+                            <p>Vous ne payez pas chaque année pour un domaine, l'hébergement est offert.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-smile"></i>
+                            </div>
+                            <h3>Paiement Après Satisfaction</h3>
+                            <p>Vous ne payez qu'après être entièrement satisfait du résultat final.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="about-section">
+                <div class="container">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>Bonjour, je suis Souraka</h2>
+                            <p>Je suis développeur de sites web adaptés aux besoins réels des entrepreneurs, commerçants, étudiants ou associations.</p>
+                            <p>Mon objectif est simple : vous aider à vendre plus rapidement vos produits en ligne grâce à un site clair, attractif et accessible à vos clients 24h/24.</p>
+                            <p>Je vous propose de créer gratuitement votre site, et vous ne me payez qu'après satisfaction, au montant que vous jugez juste.</p>
+                            <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="whatsapp-btn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Me contacter sur WhatsApp
+                            </a>
+                        </div>
+                        <div class="about-image">
+                            <!-- Vous pouvez ajouter votre photo ici -->
+                            <img src="https://placehold.co/600x400/FF6B35/FFFFFF?text=Souraka+AfroSite" alt="Souraka - Développeur Web">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Nos Offres Populaires</h2>
+                        <p>Des solutions adaptées à tous les besoins et tous les budgets</p>
+                    </div>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Mini Site Vitrine</h3>
+                                <div class="price">10 000 <span>FCFA</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check-circle"></i> 1 page responsive</li>
+                                <li><i class="fas fa-check-circle"></i> Design moderne</li>
+                                <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
+                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            </ul>
+                            <a href="#contact" class="btn">Commander</a>
+                        </div>
+                        
+                        <div class="pricing-card popular">
+                            <div class="pricing-header">
+                                <h3>Site Complet</h3>
+                                <div class="price">25 000 <span>FCFA</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check-circle"></i> 3-5 pages responsive</li>
+                                <li><i class="fas fa-check-circle"></i> Design personnalisé</li>
+                                <li><i class="fas fa-check-circle"></i> Formulaire de contact</li>
+                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            </ul>
+                            <a href="#contact" class="btn">Commander</a>
+                        </div>
+                        
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Mini E-commerce</h3>
+                                <div class="price">50 000 <span>FCFA</span></div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check-circle"></i> Site e-commerce</li>
+                                <li><i class="fas fa-check-circle"></i> Gestion des produits</li>
+                                <li><i class="fas fa-check-circle"></i> Paiement en ligne</li>
+                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            </ul>
+                            <a href="#contact" class="btn">Commander</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Page -->
+        <section id="services" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Nos Services & Prix</h2>
+                    <p>Découvrez nos offres complètes pour une présence en ligne réussie</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Mini Site Vitrine</h3>
+                            <div class="price">10 000 <span>FCFA</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check-circle"></i> 1 page responsive</li>
+                            <li><i class="fas fa-check-circle"></i> Design moderne</li>
+                            <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
+                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            <li><i class="fas fa-check-circle"></i> Livraison en 2 jours</li>
+                        </ul>
+                        <a href="#contact" class="btn">Commander</a>
+                    </div>
+                    
+                    <div class="pricing-card popular">
+                        <div class="pricing-header">
+                            <h3>Site Complet</h3>
+                            <div class="price">25 000 <span>FCFA</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check-circle"></i> 3-5 pages responsive</li>
+                            <li><i class="fas fa-check-circle"></i> Design personnalisé</li>
+                            <li><i class="fas fa-check-circle"></i> Formulaire de contact</li>
+                            <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
+                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            <li><i class="fas fa-check-circle"></i> Livraison en 5 jours</li>
+                        </ul>
+                        <a href="#contact" class="btn">Commander</a>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Mini E-commerce</h3>
+                            <div class="price">50 000 <span>FCFA</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check-circle"></i> Site e-commerce</li>
+                            <li><i class="fas fa-check-circle"></i> Gestion des produits</li>
+                            <li><i class="fas fa-check-circle"></i> Paiement en ligne</li>
+                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
+                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
+                            <li><i class="fas fa-check-circle"></i> Livraison en 7 jours</li>
+                        </ul>
+                        <a href="#contact" class="btn">Commander</a>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Services Complémentaires</h2>
+                    <p>Améliorez votre présence en ligne avec nos services additionnels</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Création de Logo</h3>
+                        <p>Un logo professionnel qui représente votre marque et attire vos clients.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>Maintenance</h3>
+                        <p>Maintenance continue de votre site web pour garantir son bon fonctionnement.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Référencement SEO</h3>
+                        <p>Optimisation de votre site pour un meilleur classement dans les moteurs de recherche.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics</h3>
+                        <p>Suivi des performances de votre site et analyse du comportement des visiteurs.</p>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Offre Spéciale Parrainage</h2>
+                    <p>Recommandez-nous et bénéficiez d'avantages exclusifs</p>
+                </div>
+                
+                <div class="feature-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Parrainez et économisez!</h3>
+                    <p>Pour chaque personne que vous me recommandez et qui me confie un projet, vous bénéficiez d'une réduction de 10 à 20% sur votre prochain site ou sur un service complémentaire (logo, maintenance, page supplémentaire, etc.).</p>
+                    <p style="font-weight: 700; color: var(--primary); margin-top: 20px;">Une offre exceptionnelle pour nos clients fidèles!</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Page -->
+        <section id="faq" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Foire Aux Questions</h2>
+                    <p>Retrouvez les réponses aux questions les plus fréquentes</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Comment se déroule le processus de création d'un site web?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Le processus se déroule en plusieurs étapes :</p>
+                            <ol>
+                                <li>Nous discutons de vos besoins et objectifs</li>
+                                <li>Je vous propose un design et un plan pour votre site</li>
+                                <li>Je développe votre site web selon vos spécifications</li>
+                                <li>Vous examinez le site et demandez des modifications si nécessaire</li>
+                                <li>Une fois satisfait, vous effectuez le paiement</li>
+                                <li>Je mets en ligne votre site et vous forme à son utilisation</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quand dois-je effectuer le paiement?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Vous effectuez le paiement uniquement après être entièrement satisfait du résultat final. C'est notre garantie de qualité et de confiance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Combien de temps faut-il pour créer un site web?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Le délai de livraison dépend du type de site :</p>
+                            <ul>
+                                <li>Mini site vitrine (1 page) : 2 jours</li>
+                                <li>Site complet (3-5 pages) : 5 jours</li>
+                                <li>Mini e-commerce : 7 jours</li>
+                            </ul>
+                            <p>Ces délais peuvent varier en fonction de la complexité du projet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Proposez-vous l'hébergement et le nom de domaine?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Oui, nous proposons un hébergement gratuit inclus dans tous nos packages. Vous n'aurez pas à payer des frais annuels d'hébergement. Le nom de domaine (votresite.com) peut être inclus à un coût supplémentaire selon sa disponibilité.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Que se passe-t-il si j'ai besoin de modifications après la livraison?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tous nos packages incluent une maintenance gratuite d'un mois après la livraison. Pendant cette période, vous pouvez demander des modifications mineures sans frais supplémentaires. Après cette période, nous proposons des services de maintenance à des tarifs avantageux.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Proposez-vous des formations pour gérer mon site?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolument! Après la livraison de votre site, je vous offre une formation complète pour que vous puissiez gérer votre contenu de manière autonome. Je reste également disponible pour répondre à vos questions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Page -->
+        <section id="contact" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contactez-Nous</h2>
+                    <p>Discutons de votre projet et obtenez un devis gratuit</p>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Restons en contact</h3>
+                        <ul class="contact-details">
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Adresse</h4>
+                                    <p>Bénin</p>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Téléphone</h4>
+                                    <p>+229 55530826</p>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>contact@afrosite.bj</p>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <p style="margin-top: 30px;">Pour les demandes urgentes, contactez-nous directement sur WhatsApp :</p>
+                        <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Nous contacter sur WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <h3 style="margin-bottom: 20px; text-align: center;">Formulaire de Contact</h3>
+                        <div class="google-form-container">
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfHV7jGSLMDUKN_Ady6GZ1gRXym1tqLqDrSYNDJ39PsRxWRNA/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="lig.jpg" alt="AfroSite Logo">
+                    </div>
+                    <p>AfroSite propose des services de création de sites web sur mesure au Bénin. Nous vous offrons des designs modernes, responsives et à des tarifs accessibles.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="#accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services & Prix</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Nos Services</h4>
+                    <ul>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Mini Site Vitrine</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Site Complet</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Mini E-commerce</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services Complémentaires</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="https://wa.me/22955530826" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="tel:+22955530826"><i class="fas fa-phone-alt"></i> +229 55530826</a></li>
+                        <li><a href="mailto:contact@afrosite.bj"><i class="fas fa-envelope"></i> contact@afrosite.bj</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Bénin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 AfroSite - Tous droits réservés. Développé avec <i class="fas fa-heart" style="color: var(--accent);"></i> par Souraka</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menu');
+        
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+        
+        // Navigation between pages
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Update active link
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show target page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === targetId) {
+                        page.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu if open
+                menu.classList.remove('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // If it's a page link, handle it with our page system
+                    if (targetId === '#accueil' || targetId === '#services' || targetId === '#faq' || targetId === '#contact') {
+                        const pageId = targetId.substring(1);
+                        
+                        // Update active link
+                        navLinks.forEach(navLink => navLink.classList.remove('active'));
+                        document.querySelector(`a[href="${targetId}"]`).classList.add('active');
+                        
+                        // Show target page
+                        pages.forEach(page => {
+                            page.classList.remove('active');
+                            if (page.id === pageId) {
+                                page.classList.add('active');
+                            }
+                        });
+                        
+                        // Close mobile menu if open
+                        menu.classList.remove('active');
+                        
+                        // Scroll to top
+                        window.scrollTo(0, 0);
+                    } else {
+                        // Regular anchor link
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
