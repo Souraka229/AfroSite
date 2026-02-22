@@ -1,1403 +1,1122 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" prefix="og: https://ogp.me/ns#">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfroSite - Création de Sites Web Sur Mesure</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #FF6B35;
-            --secondary: #2EC4B6;
-            --accent: #E71D36;
-            --dark: #1A1A2E;
-            --light: #F8F9FA;
-            --grey: #6C757D;
-            --success: #28A745;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header amélioré */
-        header {
-            background: linear-gradient(135deg, var(--dark) 0%, #2a2a4a 100%);
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo img {
-            height: 50px;
-            width: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        nav a:hover {
-            color: var(--primary);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        
-        /* Hero Section améliorée */
-        .hero {
-            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23ff6b35" width="50" height="50"/><rect fill="%232a2a4a" x="50" width="50" height="50"/><rect fill="%232a2a4a" y="50" width="50" height="50"/><rect fill="%23ff6b35" x="50" y="50" width="50" height="50"/></svg>');
-            background-size: cover;
-            color: white;
-            padding: 120px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-            animation: pulse 15s infinite linear;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin: 0 auto 40px;
-            animation: fadeInUp 1.5s ease;
-            max-width: 700px;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
-            animation: fadeInUp 2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.6);
-        }
-        
-        /* Features amélioré */
-        .features {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            color: var(--dark);
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: var(--grey);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            background: linear-gradient(145deg, #ffffff, #f5f5f5);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 0;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            transition: height 0.5s;
-        }
-        
-        .feature-card:hover::before {
-            height: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.5rem;
-        }
-        
-        /* Pricing amélioré (votre partie préférée) */
-        .pricing {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pricing::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-        }
-        
-        .pricing::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(46, 196, 182, 0.1) 0%, transparent 70%);
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .pricing-card.popular {
-            transform: scale(1.05);
-            z-index: 3;
-            border: 2px solid var(--primary);
-            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
-        }
-        
-        .pricing-card.popular::before {
-            content: 'POPULAIRE';
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            color: white;
-            padding: 8px 40px;
-            transform: rotate(45deg);
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .pricing-card.popular:hover {
-            transform: scale(1.05) translateY(-15px);
-        }
-        
-        .pricing-header h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .price {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-        }
-        
-        .price span {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--grey);
-            margin-left: 5px;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 35px;
-        }
-        
-        .pricing-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .pricing-features li:last-child {
-           border-bottom: none;
-        }
-        
-        .pricing-features li i {
-            color: var(--success);
-            font-size: 1.2rem;
-        }
-        
-        /* FAQ amélioré */
-        .faq {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            margin-bottom: 25px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .faq-question {
-            padding: 25px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-        
-        .faq-question:hover {
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-        }
-        
-        .faq-question i {
-            transition: transform 0.3s;
-        }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s, padding 0.5s;
-            background-color: white;
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 25px;
-        }
-        
-        /* Contact amélioré */
-        .contact {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 60px;
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 25px;
-            color: var(--dark);
-            font-size: 1.8rem;
-        }
-        
-        .contact-details {
-            list-style: none;
-        }
-        
-        .contact-details li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(to right, #25D366, #128C7E);
-            color: white;
-            padding: 16px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 30px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-        
-        .contact-form-container {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .google-form-container {
-            width: 100%;
-            height: 2938px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .google-form-container iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Footer amélioré */
-        footer {
-            background: linear-gradient(135deg, var(--dark) 0%, #2a2a4a 100%);
-            color: white;
-            padding: 70px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-logo {
-            margin-bottom: 25px;
-        }
-        
-        .footer-logo img {
-            height: 60px;
-            width: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
-        }
-        
-        .footer-about p {
-            color: #ccc;
-            margin-bottom: 25px;
-        }
-        
-        .footer-links h4 {
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 15px;
-            font-size: 1.3rem;
-        }
-        
-        .footer-links h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #2a2a4a;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-        
-        /* Floating WhatsApp Button */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(to right, #25D366, #128C7E);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .floating-whatsapp:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h2 {
-                font-size: 2.8rem;
-            }
-            
-            .pricing-card.popular {
-                transform: scale(1);
-                margin: 30px 0;
-            }
-            
-            .pricing-card.popular:hover {
-                transform: translateY(-15px);
-            }
-            
-            .google-form-container {
-                height: 3200px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            
-            nav ul {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--dark);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: left 0.4s;
-                gap: 40px;
-            }
-            
-            nav ul.active {
-                left: 0;
-            }
-            
-            .hero h2 {
-                font-size: 2.3rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .price {
-                font-size: 2.8rem;
-            }
-            
-            .google-form-container {
-                height: 3500px;
-            }
-            
-            .floating-whatsapp {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /* Page specific styles */
-        .page {
-            display: none;
-            padding: 100px 0;
-        }
-        
-        .page.active {
-            display: block;
-            animation: fadeInUp 0.5s ease;
-        }
-        
-        /* About Section */
-        .about-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 25px;
-            color: var(--dark);
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--grey);
-        }
-        
-        .about-image {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-text h2 {
-                font-size: 2rem;
-            }
-        }
-.additional-forms {
-    padding: 100px 0;
-    background: white;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.forms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
-}
+<!-- ═══ SEO PRIMARY ═══ -->
+<title>AfroSite — Agence Web N°1 au Bénin | Sites Professionnels, Paiement Après Satisfaction</title>
+<meta name="description" content="AfroSite : agence de création de sites web professionnels au Bénin. Restaurants, traders, boutiques, entreprises. Paiement après satisfaction. Note parfaite 5/5. Livraison en 2 à 7 jours. Contact : +229 55 53 08 26.">
+<meta name="keywords" content="création site web Bénin, site web Cotonou, agence web Bénin, site web professionnel Bénin, site web pas cher Bénin, créateur site web Cotonou, AfroSite, site restaurant Bénin, site trader Bénin, e-commerce Bénin, site web Porto-Novo, développeur web Bénin">
+<meta name="author" content="Souraka - AfroSite Agency">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="language" content="French">
+<meta name="geo.region" content="BJ">
+<meta name="geo.placename" content="Cotonou, Bénin">
+<link rel="canonical" href="https://afro-site.vercel.app/">
 
-.form-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+<!-- ═══ OPEN GRAPH ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://afro-site.vercel.app/">
+<meta property="og:title" content="AfroSite — Agence Web N°1 au Bénin | Paiement Après Satisfaction">
+<meta property="og:description" content="Sites web professionnels au Bénin. Restaurants, traders, boutiques, entreprises. Vous payez seulement si vous êtes satisfait. Note 5/5.">
+<meta property="og:locale" content="fr_BJ">
+<meta property="og:site_name" content="AfroSite Agency">
 
-.form-card h3 {
-    margin-bottom: 25px;
-    color: var(--dark);
-    font-size: 1.8rem;
-}
+<!-- ═══ TWITTER CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AfroSite — Agence Web N°1 au Bénin">
+<meta name="twitter:description" content="Sites web pro au Bénin. Paiement après satisfaction. Note 5/5.">
 
-.form-card .google-form-container {
-    height: 600px; /* Ajustez selon la hauteur souhaitée */
+<!-- ═══ FAVICON SVG ═══ -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text y='68' x='50' text-anchor='middle' font-size='52' font-family='Georgia,serif' font-weight='900' fill='%231d4ed8'>A</text><text y='84' x='50' text-anchor='middle' font-size='18' font-family='Georgia,serif' font-weight='700' fill='white'>Site</text></svg>">
+<link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text y='68' x='50' text-anchor='middle' font-size='52' font-family='Georgia,serif' font-weight='900' fill='%231d4ed8'>A</text></svg>">
+<meta name="theme-color" content="#0a0a0a">
+
+<!-- ═══ SCHEMA.ORG JSON-LD ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://afro-site.vercel.app/#business",
+      "name": "AfroSite Agency",
+      "description": "Agence de création de sites web professionnels au Bénin. Restaurants, traders, boutiques, entreprises. Paiement après satisfaction.",
+      "url": "https://afro-site.vercel.app/",
+      "telephone": "+22955530826",
+      "email": "contact@afrosite.bj",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BJ",
+        "addressLocality": "Cotonou"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "6.3654",
+        "longitude": "2.4183"
+      },
+      "openingHours": "Mo-Su 08:00-20:00",
+      "priceRange": "FCFA 15000 - 300000",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "reviewCount": "5"
+      },
+      "sameAs": ["https://afro-site.vercel.app/"]
+    },
+    {
+      "@type": "WebDesign",
+      "name": "Création de Sites Web Professionnels au Bénin",
+      "provider": {"@id": "https://afro-site.vercel.app/#business"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Est-ce que je paye avant la livraison du site ?","acceptedAnswer":{"@type":"Answer","text":"Non. Vous ne payez qu'après avoir vu et validé votre site. Zéro avance demandée, c'est notre garantie absolue."}},
+        {"@type":"Question","name":"Combien de temps pour créer un site web au Bénin ?","acceptedAnswer":{"@type":"Answer","text":"Mini vitrine : 2 jours. Site professionnel : 5 jours. E-commerce : 7 à 10 jours."}},
+        {"@type":"Question","name":"AfroSite crée quel type de sites web ?","acceptedAnswer":{"@type":"Answer","text":"Restaurants, trading/finance, boutiques e-commerce, sites corporates, ONG, plateformes et applications web sur mesure."}}
+      ]
+    }
+  ]
 }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</script>
+
+<!-- ═══ FONTS & ICONS ═══ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ════════════════════════════════
+   TOKENS
+════════════════════════════════ */
+:root{
+  --ink:#09090b; --ink2:#18181b;
+  --text:#27272a; --muted:#71717a; --subtle:#a1a1aa;
+  --border:#e4e4e7; --border2:#f4f4f5;
+  --surface:#fafafa; --white:#ffffff;
+  --blue:#1d4ed8; --blue-h:#1e3a8a; --blue-light:#eff6ff;
+  --green:#15803d; --green-bg:#f0fdf4; --green-b:#bbf7d0;
+  --wa:#25d366;
+  --gold:#b45309; --gold-bg:#fffbeb; --gold-b:#fde68a;
+  --r:18px; --r2:12px; --r3:8px;
+  --sh:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+  --sh-lg:0 20px 60px rgba(0,0,0,.1),0 8px 20px rgba(0,0,0,.05);
+  --sh-xl:0 40px 100px rgba(0,0,0,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+/* ════════════════════════════════
+   NAV
+════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  height:62px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+#nav.scrolled{box-shadow:var(--sh);}
+.n-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;color:var(--ink);letter-spacing:-.5px;cursor:pointer;}
+.n-logo em{font-style:normal;color:var(--blue);}
+.n-links{display:flex;align-items:center;gap:2px;list-style:none;}
+.n-links a{padding:7px 14px;border-radius:var(--r3);font-size:.875rem;font-weight:500;color:var(--muted);transition:all .2s;cursor:pointer;}
+.n-links a:hover,.n-links a.active{color:var(--ink);background:var(--surface);}
+.n-right{display:flex;align-items:center;gap:10px;}
+.n-wa{display:flex;align-items:center;gap:8px;padding:8px 18px;background:var(--wa);color:#fff;border-radius:980px;font-size:.84rem;font-weight:700;transition:all .2s;}
+.n-wa:hover{transform:scale(1.03);box-shadow:0 6px 20px rgba(37,211,102,.35);}
+.n-cta{padding:8px 18px;background:var(--ink);color:#fff;border-radius:980px;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.n-cta:hover{background:var(--ink2);transform:scale(1.02);}
+.hamburger{display:none;flex-direction:column;gap:4.5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{width:22px;height:1.5px;background:var(--ink);border-radius:2px;display:block;transition:all .3s;}
+
+/* ════════════════════════════════
+   PAGE ROUTER
+════════════════════════════════ */
+.page{display:none;padding-top:62px;}
+.page.active{display:block;animation:pageIn .35s ease both;}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ════════════════════════════════
+   SHARED
+════════════════════════════════ */
+.wrap{max-width:1160px;margin:0 auto;padding:0 48px;}
+.section{padding:96px 0;}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:980px;font-size:.78rem;font-weight:600;letter-spacing:.3px;}
+.tag-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-b);}
+.tag-blue{background:var(--blue-light);color:var(--blue);}
+.tag-gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-b);}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;color:var(--muted);margin-bottom:14px;display:block;}
+.display{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:900;color:var(--ink);line-height:1.06;letter-spacing:-1.5px;}
+.display em{font-style:normal;color:var(--blue);}
+.display-xl{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,4.8rem);font-weight:900;color:var(--ink);line-height:1.04;letter-spacing:-2px;}
+.display-xl em{font-style:normal;color:var(--blue);}
+.lead{font-size:1.08rem;color:var(--muted);line-height:1.7;max-width:560px;}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:980px;font-size:.93rem;font-weight:600;transition:all .25s;cursor:pointer;border:none;}
+.btn-ink{background:var(--ink);color:#fff;}
+.btn-ink:hover{background:var(--ink2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.18);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+.btn-outline:hover{background:var(--surface);transform:translateY(-2px);}
+.btn-lg{padding:16px 34px;font-size:1rem;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.v{opacity:1;transform:none;}
+.d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;} .d4{transition-delay:.4s;}
+.divider{border:none;border-top:1px solid var(--border);}
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.hero{padding:100px 0 80px;}
+.hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;}
+.hero-badge{margin-bottom:26px;}
+.hero h1{margin-bottom:20px;}
+.hero-sub{margin-bottom:38px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px;}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-pill{display:flex;align-items:center;gap:7px;padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r3);font-size:.8rem;font-weight:500;}
+.hero-pill i{font-size:.75rem;color:var(--green);}
+/* Card right */
+.hero-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:30px;box-shadow:var(--sh-lg);position:relative;}
+.hc-top{background:var(--ink);border-radius:12px;padding:24px;text-align:center;margin-bottom:18px;}
+.hc-big{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:#fff;line-height:1;}
+.hc-sub{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:4px;}
+.hc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.hc-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.hci-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:800;color:var(--ink);line-height:1;margin-bottom:2px;}
+.hci-lbl{font-size:.72rem;color:var(--muted);}
+.hero-float{position:absolute;top:-16px;right:-16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r2);padding:12px 16px;box-shadow:var(--sh);}
+.hf-stars{color:#f59e0b;font-size:.82rem;letter-spacing:1px;margin-bottom:2px;}
+.hf-lbl{font-size:.77rem;font-weight:700;color:var(--ink);}
+.hf-sub{font-size:.7rem;color:var(--muted);}
+.hero-float2{position:absolute;bottom:-16px;left:-16px;background:var(--green);color:#fff;border-radius:10px;padding:10px 16px;font-size:.78rem;font-weight:700;box-shadow:var(--sh);}
+
+/* TRUST BAR */
+.trust-bar{padding:20px 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.tb-inner{display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap;}
+.tb-item{display:flex;align-items:center;gap:9px;font-size:.84rem;font-weight:600;color:var(--muted);}
+.tb-item i{font-size:.95rem;color:var(--blue);}
+
+/* PROMISE SECTION */
+.promise{background:var(--ink);padding:80px 0;}
+.promise-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.promise-left .display{color:#fff;}
+.promise-left .display em{color:#93c5fd;}
+.promise-left p{color:rgba(255,255,255,.55);margin-top:18px;font-size:1rem;line-height:1.7;max-width:400px;}
+.ps-item{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.ps-item:last-child{border:none;}
+.ps-num{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.6);flex-shrink:0;}
+.ps-text h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:4px;}
+.ps-text p{font-size:.86rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px;}
+.why-card{padding:26px;border:1px solid var(--border);border-radius:var(--r);transition:all .3s;}
+.why-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:transparent;}
+.wc-icon{width:46px;height:46px;border-radius:12px;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:16px;}
+.why-card h3{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:7px;letter-spacing:-.2px;}
+.why-card p{font-size:.86rem;color:var(--muted);line-height:1.65;}
+
+/* ════════════════════════════════
+   TESTIMONIALS CAROUSEL (5 cards, auto-rotate)
+════════════════════════════════ */
+.testi-section{padding:80px 0;background:var(--surface);overflow:hidden;}
+.testi-header{text-align:center;margin-bottom:48px;}
+.carousel-wrap{position:relative;max-width:1160px;margin:0 auto;padding:0 48px;}
+.carousel-track-outer{overflow:hidden;border-radius:var(--r);}
+.carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.tcard{min-width:calc(100% / 3);padding:0 10px;box-sizing:border-box;}
+.tcard-inner{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:28px;height:100%;transition:box-shadow .3s;}
+.tcard-inner:hover{box-shadow:var(--sh-lg);}
+.tc-stars{color:#f59e0b;font-size:.82rem;margin-bottom:12px;letter-spacing:1px;}
+.tc-text{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:20px;font-style:italic;}
+.tc-author{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border2);}
+.tc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff;flex-shrink:0;}
+.tc-name{font-size:.85rem;font-weight:700;color:var(--ink);}
+.tc-job{font-size:.76rem;color:var(--muted);}
+/* Dots */
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:28px;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s;border:none;}
+.dot.active{background:var(--ink);width:22px;border-radius:4px;}
+/* Arrows */
+.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;color:var(--ink);transition:all .25s;z-index:10;box-shadow:var(--sh);}
+.carousel-arrow:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.arr-prev{left:0;}
+.arr-next{right:0;}
+
+/* PROJECTS */
+.projects-section{padding:96px 0;}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
+.proj-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .3s;background:var(--white);}
+.proj-card:hover{box-shadow:var(--sh-xl);transform:translateY(-6px);border-color:transparent;}
+.proj-visual{height:200px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative;overflow:hidden;}
+.pv-overlay{position:absolute;inset:0;background:rgba(9,9,11,0);display:flex;align-items:center;justify-content:center;opacity:0;transition:all .3s;}
+.proj-card:hover .pv-overlay{background:rgba(9,9,11,.5);opacity:1;}
+.pv-link{color:#fff;font-size:.82rem;font-weight:700;border:1.5px solid rgba(255,255,255,.8);padding:8px 18px;border-radius:980px;display:flex;align-items:center;gap:7px;transition:all .2s;}
+.pv-link:hover{background:rgba(255,255,255,.15);}
+.pv1{background:linear-gradient(135deg,#fff7ed,#fed7aa);}
+.pv2{background:linear-gradient(135deg,#f0fdf4,#bbf7d0);}
+.pv3{background:linear-gradient(135deg,#eff6ff,#bfdbfe);}
+.proj-body{padding:22px;}
+.proj-cat{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:7px;}
+.proj-body h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:7px;letter-spacing:-.2px;}
+.proj-body p{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.proj-tag{padding:3px 9px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:.72rem;font-weight:600;color:var(--muted);}
+
+/* SERVICES GRID */
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
+.srv-card{padding:26px;border:1px solid var(--border);border-radius:var(--r);transition:all .3s;background:var(--white);}
+.srv-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:transparent;}
+.srv-icon{font-size:1.9rem;margin-bottom:15px;}
+.srv-card h3{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:7px;letter-spacing:-.2px;}
+.srv-card p{font-size:.85rem;color:var(--muted);line-height:1.65;}
+.srv-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.srv-tag{padding:3px 9px;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:.71rem;font-weight:600;color:var(--muted);}
+
+/* CTA STRIP */
+.cta-strip{background:var(--ink);padding:72px 0;}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-left h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.1rem);font-weight:800;color:#fff;letter-spacing:-.7px;margin-bottom:8px;}
+.cta-left p{font-size:.97rem;color:rgba(255,255,255,.6);}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-white{background:#fff;color:var(--ink);}
+.btn-white:hover{background:var(--surface);transform:translateY(-2px);}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.25);}
+.btn-ghost:hover{background:rgba(255,255,255,.18);}
+
+/* ════════════════════════════════
+   PAGE: TARIFS
+════════════════════════════════ */
+.tarifs-hero{padding:80px 0 0;text-align:center;}
+.tarif-switch{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:980px;padding:4px;margin-top:30px;margin-bottom:56px;}
+.ts-btn{padding:9px 24px;border-radius:980px;font-size:.87rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .25s;}
+.ts-btn.active{background:var(--ink);color:#fff;}
+/* Cards */
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px;}
+.p-card{border:1px solid var(--border);border-radius:var(--r);padding:36px 28px;position:relative;background:var(--white);transition:all .3s;}
+.p-card:hover{box-shadow:var(--sh-xl);transform:translateY(-5px);}
+.p-card.featured{border:2px solid var(--ink);background:var(--ink);color:#fff;}
+.p-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:4px 16px;background:var(--blue);color:#fff;border-radius:980px;font-size:.72rem;font-weight:700;white-space:nowrap;}
+.p-tier{font-size:.74rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:11px;}
+.p-card.featured .p-tier{color:rgba(255,255,255,.45);}
+.p-amount{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:900;color:var(--ink);letter-spacing:-2px;line-height:1;}
+.p-card.featured .p-amount{color:#fff;}
+.p-cur{font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;vertical-align:super;color:var(--muted);}
+.p-card.featured .p-cur{color:rgba(255,255,255,.5);}
+.p-del{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--green);margin:8px 0 22px;}
+.p-card.featured .p-del{color:#86efac;}
+.p-div{border:none;border-top:1px solid var(--border);margin-bottom:20px;}
+.p-card.featured .p-div{border-color:rgba(255,255,255,.1);}
+.p-feats{list-style:none;margin-bottom:28px;}
+.p-feats li{display:flex;align-items:center;gap:9px;padding:8px 0;font-size:.87rem;border-bottom:1px solid var(--border2);}
+.p-feats li:last-child{border:none;}
+.p-card.featured .p-feats li{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.07);}
+.p-feats li i{font-size:.72rem;color:var(--green);flex-shrink:0;}
+.p-card.featured .p-feats li i{color:#86efac;}
+.p-btn{display:block;text-align:center;padding:13px;border-radius:980px;font-weight:700;font-size:.9rem;border:1.5px solid var(--ink);color:var(--ink);background:transparent;transition:all .25s;text-decoration:none;}
+.p-btn:hover{background:var(--ink);color:#fff;}
+.p-card.featured .p-btn{background:#fff;color:var(--ink);border-color:#fff;}
+.p-card.featured .p-btn:hover{background:var(--surface);}
+/* Enterprise */
+.ent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px;}
+.ent-card{border:1px solid var(--border);border-radius:var(--r);padding:36px 28px;background:var(--white);transition:all .3s;position:relative;}
+.ent-card:hover{box-shadow:var(--sh-xl);transform:translateY(-5px);}
+.ent-card.featured{border:2px solid var(--blue);background:linear-gradient(145deg,#f8faff,#eff6ff);}
+.ent-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 13px;background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-b);border-radius:980px;font-size:.71rem;font-weight:700;margin-bottom:18px;}
+.ent-tier{font-size:.74rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:10px;}
+.ent-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--ink);letter-spacing:-1px;line-height:1.1;margin-bottom:5px;}
+.ent-note{font-size:.79rem;color:var(--muted);margin-bottom:20px;}
+.ent-feats{list-style:none;margin-bottom:28px;}
+.ent-feats li{display:flex;align-items:flex-start;gap:9px;padding:8px 0;font-size:.87rem;border-bottom:1px solid var(--border2);}
+.ent-feats li:last-child{border:none;}
+.ent-feats li i{font-size:.72rem;color:var(--blue);flex-shrink:0;margin-top:5px;}
+.ent-btn{display:block;text-align:center;padding:13px;border-radius:980px;font-weight:700;font-size:.9rem;border:1.5px solid var(--border);color:var(--ink);background:transparent;transition:all .25s;text-decoration:none;}
+.ent-btn:hover,.ent-card.featured .ent-btn{background:var(--ink);color:#fff;border-color:var(--ink);}
+/* Compare */
+.compare-table{width:100%;border-collapse:collapse;margin-top:36px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);font-size:.84rem;}
+.compare-table th{background:var(--surface);padding:13px 18px;font-weight:700;text-align:left;color:var(--ink);border-bottom:1px solid var(--border);}
+.compare-table td{padding:12px 18px;border-bottom:1px solid var(--border2);vertical-align:middle;}
+.compare-table tr:last-child td{border:none;}
+.compare-table tr:hover td{background:var(--surface);}
+.ct-y{color:var(--green);} .ct-n{color:#d1d5db;} .ct-b{font-weight:700;color:var(--ink);}
+
+/* PARRAINAGE */
+.parrain-section{background:var(--surface);padding:80px 0;}
+.parrain-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;box-shadow:var(--sh);}
+.pc-left h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.7px;margin-bottom:16px;}
+.pc-left p{font-size:.97rem;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.pc-steps{display:flex;flex-direction:column;gap:16px;}
+.pc-step{display:flex;align-items:flex-start;gap:14px;}
+.pc-dot{width:32px;height:32px;border-radius:50%;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;}
+.pc-step p{font-size:.9rem;color:var(--text);line-height:1.6;}
+.pc-step strong{color:var(--ink);}
+.pc-right{background:var(--ink);border-radius:var(--r2);padding:36px;text-align:center;color:#fff;}
+.pc-big{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:#fff;line-height:1;}
+.pc-pct{font-size:1.5rem;}
+.pc-label{font-size:.9rem;color:rgba(255,255,255,.6);margin:8px 0 24px;}
+.pc-wa{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;background:var(--wa);border-radius:980px;font-weight:700;font-size:.93rem;text-decoration:none;color:#fff;transition:all .25s;}
+.pc-wa:hover{background:#1ebe59;transform:scale(1.03);}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px;}
+.faq-item{border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:border-color .25s;}
+.faq-item:hover,.faq-item.open{border-color:var(--ink);}
+.faq-q{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--text);gap:14px;}
+.faq-q i{font-size:.76rem;color:var(--muted);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-q i{transform:rotate(45deg);color:var(--ink);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:.87rem;color:var(--muted);line-height:1.7;}
+.faq-item.open .faq-a{max-height:300px;padding:0 20px 18px;}
+
+/* CONTACT PAGE */
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start;padding:80px 0 100px;}
+.cg-left h2{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:800;color:var(--ink);letter-spacing:-.7px;margin-bottom:14px;}
+.cg-left .lead{font-size:.95rem;margin-bottom:32px;}
+.c-methods{display:flex;flex-direction:column;gap:11px;margin-bottom:30px;}
+.c-method{display:flex;align-items:center;gap:15px;padding:15px 18px;border:1px solid var(--border);border-radius:var(--r2);transition:all .25s;}
+.c-method:hover{border-color:var(--ink);transform:translateX(4px);}
+.c-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+.ci-wa{background:#dcfce7;color:#16a34a;} .ci-ph{background:var(--blue-light);color:var(--blue);} .ci-em{background:#fef3c7;color:#d97706;}
+.c-text strong{display:block;font-size:.87rem;font-weight:700;color:var(--ink);}
+.c-text span{font-size:.78rem;color:var(--muted);}
+.spm{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;}
+.spm-stars{color:#f59e0b;font-size:.84rem;margin-bottom:7px;}
+.spm-text{font-size:.84rem;color:var(--text);font-style:italic;line-height:1.65;}
+.spm-auth{font-size:.77rem;color:var(--muted);font-weight:600;margin-top:6px;}
+/* Form */
+.c-form{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:38px;box-shadow:var(--sh);}
+.cf-h{font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.3px;}
+.cf-s{font-size:.84rem;color:var(--muted);margin-bottom:26px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.79rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 13px;border:1.5px solid var(--border);border-radius:var(--r3);font-size:.89rem;font-family:inherit;background:var(--white);color:var(--ink);transition:border-color .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--ink);}
+.fg textarea{resize:vertical;min-height:100px;}
+.f-submit{width:100%;padding:15px;background:var(--ink);color:#fff;border:none;border-radius:980px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .3s;}
+.f-submit:hover{background:var(--ink2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.2);}
+.f-note{text-align:center;font-size:.74rem;color:var(--muted);margin-top:10px;}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:60px 0 34px;}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:28px;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;color:#fff;margin-bottom:9px;}
+.ft-logo em{font-style:normal;color:#93c5fd;}
+.ft-tag{font-size:.83rem;max-width:220px;line-height:1.65;margin-bottom:16px;}
+.ft-wa{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--wa);color:#fff;border-radius:980px;font-size:.81rem;font-weight:700;transition:all .2s;}
+.ft-wa:hover{transform:scale(1.03);}
+.ft-col h5{font-size:.76rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:#fff;margin-bottom:16px;}
+.ft-col a{display:block;font-size:.83rem;color:rgba(255,255,255,.42);margin-bottom:10px;transition:color .2s;cursor:pointer;}
+.ft-col a:hover{color:#fff;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft-bottom p{font-size:.78rem;}
+.ft-rating{display:flex;align-items:center;gap:7px;font-size:.78rem;}
+.ft-stars{color:#f59e0b;}
+
+/* FLOAT */
+.float-wa{position:fixed;bottom:26px;right:26px;width:52px;height:52px;background:var(--wa);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;z-index:8000;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:all .3s;text-decoration:none;animation:wapulse 3s infinite;}
+.float-wa:hover{transform:scale(1.12);}
+@keyframes wapulse{0%,100%{box-shadow:0 4px 18px rgba(37,211,102,.4);}50%{box-shadow:0 4px 28px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.1);}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-card{display:none;}
+  .promise-inner{grid-template-columns:1fr;}
+  .why-grid,.srv-grid{grid-template-columns:1fr 1fr;}
+  .proj-grid{grid-template-columns:1fr 1fr;}
+  .p-grid,.ent-grid{grid-template-columns:1fr;}
+  .parrain-card{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .ft-top{grid-template-columns:1fr 1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  .tcard{min-width:50%;}
+}
+@media(max-width:768px){
+  #nav{padding:0 20px;}
+  .n-links,.n-right{display:none;}
+  .n-links.open{display:flex;position:fixed;top:62px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);flex-direction:column;padding:22px 20px;gap:4px;z-index:8999;}
+  .hamburger{display:flex;}
+  .wrap{padding:0 20px;}
+  .section{padding:64px 0;}
+  .tcard{min-width:100%;}
+  .carousel-wrap{padding:0 20px;}
+  .carousel-arrow{display:none;}
+  .why-grid,.srv-grid,.proj-grid{grid-template-columns:1fr;}
+  .cta-inner{flex-direction:column;text-align:center;}
+  .form-row{grid-template-columns:1fr;}
+  .ft-top{grid-template-columns:1fr;}
+  .c-form{padding:24px;}
+}
+@media(max-width:480px){
+  .tarif-switch{flex-direction:column;border-radius:var(--r);}
+}
+</style>
 </head>
 <body>
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="floating-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="lig.jpg" alt="AfroSite Logo">
-                <h1>AfroSite</h1>
-            </div>
-            
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <nav>
-                <ul id="menu">
-                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
-                    <li><a href="#services" class="nav-link">Services & Prix</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-<li><a href="avis-parainage.html">Avis & Parrainage</a></li> 
-                </ul>
-            </nav>
+<!-- Float WA -->
+<a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20un%20site%20web%20professionnel." class="float-wa" target="_blank" aria-label="Contacter sur WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Navigation principale">
+  <div class="n-logo" onclick="goTo('home')">Afro<em>Site</em></div>
+  <ul class="n-links" id="navLinks">
+    <li><a class="nav-link active" data-page="home">Accueil</a></li>
+    <li><a class="nav-link" data-page="services">Services</a></li>
+    <li><a class="nav-link" data-page="tarifs">Tarifs</a></li>
+    <li><a class="nav-link" data-page="realisations">Réalisations</a></li>
+    <li><a class="nav-link" data-page="contact">Contact</a></li>
+  </ul>
+  <div class="n-right">
+    <a href="https://wa.me/22955530826" class="n-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <div class="n-cta nav-link" data-page="contact">Devis gratuit</div>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu mobile"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ═══════════ PAGE: HOME ═══════════ -->
+<main>
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Section principale">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge"><span class="tag tag-green"><i class="fas fa-star"></i> Note parfaite 5/5 — Paiement uniquement après satisfaction</span></div>
+          <h1 class="display-xl">Votre site web.<br>Vous payez <em>seulement<br>si vous êtes<br>satisfait.</em></h1>
+          <p class="hero-sub lead">Agence web professionnelle au Bénin. Restaurants, traders, boutiques, entreprises — nous créons tout genre de site. Zéro risque, zéro avance.</p>
+          <div class="hero-actions">
+            <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20un%20site%20web%20!" class="btn btn-ink btn-lg" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Démarrer sur WhatsApp</a>
+            <div class="btn btn-outline btn-lg nav-link" data-page="tarifs">Voir les tarifs</div>
+          </div>
+          <div class="hero-pills">
+            <div class="hero-pill"><i class="fas fa-shield-alt"></i> Paiement après satisfaction</div>
+            <div class="hero-pill"><i class="fas fa-bolt"></i> Livraison 2–10 jours</div>
+            <div class="hero-pill"><i class="fas fa-server"></i> Hébergement gratuit</div>
+          </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Accueil Page -->
-        <section id="accueil" class="page active">
-            <div class="hero">
-                <div class="container hero-content">
-                    <h2>Création de Sites Web Sur Mesure</h2>
-                    <p>Des sites web professionnels, modernes et adaptés à vos besoins. Payez seulement après satisfaction!</p>
-                    <a href="#contact" class="btn">Je veux un site web <i class="fas fa-arrow-right"></i></a>
-                </div>
+        <div class="hero-right">
+          <div class="hero-float"><div class="hf-stars">★★★★★</div><div class="hf-lbl">Note parfaite 5/5</div><div class="hf-sub">100% de clients satisfaits</div></div>
+          <div class="hero-card">
+            <div class="hc-top"><div class="hc-big">0 FCFA</div><div class="hc-sub">vous payez avant validation du site</div></div>
+            <div class="hc-grid">
+              <div class="hc-item"><div class="hci-num">5.0</div><div class="hci-lbl">Note / 5</div></div>
+              <div class="hc-item"><div class="hci-num">∞</div><div class="hci-lbl">Révisions</div></div>
+              <div class="hc-item"><div class="hci-num">2j</div><div class="hci-lbl">Livraison min.</div></div>
+              <div class="hc-item"><div class="hci-num">100%</div><div class="hci-lbl">Satisfaits</div></div>
             </div>
-            
-            <div class="features">
-                <div class="container">
-                    <div class="section-title">
-                        <h2>Pourquoi choisir AfroSite?</h2>
-                        <p>Nous offrons des solutions web complètes et personnalisées pour booster votre présence en ligne</p>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3>Design Moderne & Responsive</h3>
-                            <p>Votre site sera visible et magnifique sur tous les appareils: téléphone, tablette et ordinateur.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-tags"></i>
-                            </div>
-                            <h3>Tarifs Accessibles</h3>
-                            <p>Des prix adaptés à tous les budgets, à partir de 10 000 FCFA seulement.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-gift"></i>
-                            </div>
-                            <h3>Hébergement Gratuit</h3>
-                            <p>Vous ne payez pas chaque année pour un domaine, l'hébergement est offert.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-smile"></i>
-                            </div>
-                            <h3>Paiement Après Satisfaction</h3>
-                            <p>Vous ne payez qu'après être entièrement satisfait du résultat final.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- About Section -->
-            <div class="about-section">
-                <div class="container">
-                    <div class="about-content">
-                        <div class="about-text">
-                            <h2>Bonjour, je suis Souraka</h2>
-                            <p>Je suis développeur de sites web adaptés aux besoins réels des entrepreneurs, commerçants, étudiants ou associations.</p>
-                            <p>Mon objectif est simple : vous aider à vendre plus rapidement vos produits en ligne grâce à un site clair, attractif et accessible à vos clients 24h/24.</p>
-                            <p>Je vous propose de créer gratuitement votre site, et vous ne me payez qu'après satisfaction, au montant que vous jugez juste.</p>
-                            <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="whatsapp-btn" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Me contacter sur WhatsApp
-                            </a>
-                        </div>
-                        <div class="about-image">
-                            <!-- Vous pouvez ajouter votre photo ici -->
-                            <img src="https://placehold.co/600x400/FF6B35/FFFFFF?text=Souraka+AfroSite" alt="Souraka - Développeur Web">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="pricing">
-                <div class="container">
-                    <div class="section-title">
-                        <h2>Nos Offres Populaires</h2>
-                        <p>Des solutions adaptées à tous les besoins et tous les budgets</p>
-                    </div>
-                    <div class="pricing-grid">
-                        <div class="pricing-card">
-                            <div class="pricing-header">
-                                <h3>Mini Site Vitrine</h3>
-                                <div class="price">10 000 <span>FCFA</span></div>
-                            </div>
-                            <ul class="pricing-features">
-                                <li><i class="fas fa-check-circle"></i> 1 page responsive</li>
-                                <li><i class="fas fa-check-circle"></i> Design moderne</li>
-                                <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
-                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            </ul>
-                            <a href="#contact" class="btn">Commander</a>
-                        </div>
-                        
-                        <div class="pricing-card popular">
-                            <div class="pricing-header">
-                                <h3>Site Complet</h3>
-                                <div class="price">25 000 <span>FCFA</span></div>
-                            </div>
-                            <ul class="pricing-features">
-                                <li><i class="fas fa-check-circle"></i> 3-5 pages responsive</li>
-                                <li><i class="fas fa-check-circle"></i> Design personnalisé</li>
-                                <li><i class="fas fa-check-circle"></i> Formulaire de contact</li>
-                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            </ul>
-                            <a href="#contact" class="btn">Commander</a>
-                        </div>
-                        
-                        <div class="pricing-card">
-                            <div class="pricing-header">
-                                <h3>Mini E-commerce</h3>
-                                <div class="price">50 000 <span>FCFA</span></div>
-                            </div>
-                            <ul class="pricing-features">
-                                <li><i class="fas fa-check-circle"></i> Site e-commerce</li>
-                                <li><i class="fas fa-check-circle"></i> Gestion des produits</li>
-                                <li><i class="fas fa-check-circle"></i> Paiement en ligne</li>
-                                <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                                <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            </ul>
-                            <a href="#contact" class="btn">Commander</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Services Page -->
-        <section id="services" class="page">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Nos Services & Prix</h2>
-                    <p>Découvrez nos offres complètes pour une présence en ligne réussie</p>
-                </div>
-                
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Mini Site Vitrine</h3>
-                            <div class="price">10 000 <span>FCFA</span></div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check-circle"></i> 1 page responsive</li>
-                            <li><i class="fas fa-check-circle"></i> Design moderne</li>
-                            <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
-                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            <li><i class="fas fa-check-circle"></i> Livraison en 2 jours</li>
-                        </ul>
-                        <a href="#contact" class="btn">Commander</a>
-                    </div>
-                    
-                    <div class="pricing-card popular">
-                        <div class="pricing-header">
-                            <h3>Site Complet</h3>
-                            <div class="price">25 000 <span>FCFA</span></div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check-circle"></i> 3-5 pages responsive</li>
-                            <li><i class="fas fa-check-circle"></i> Design personnalisé</li>
-                            <li><i class="fas fa-check-circle"></i> Formulaire de contact</li>
-                            <li><i class="fas fa-check-circle"></i> Intégration WhatsApp</li>
-                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            <li><i class="fas fa-check-circle"></i> Livraison en 5 jours</li>
-                        </ul>
-                        <a href="#contact" class="btn">Commander</a>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Mini E-commerce</h3>
-                            <div class="price">50 000 <span>FCFA</span></div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check-circle"></i> Site e-commerce</li>
-                            <li><i class="fas fa-check-circle"></i> Gestion des produits</li>
-                            <li><i class="fas fa-check-circle"></i> Paiement en ligne</li>
-                            <li><i class="fas fa-check-circle"></i> Hébergement gratuit</li>
-                            <li><i class="fas fa-check-circle"></i> Maintenance 1 mois</li>
-                            <li><i class="fas fa-check-circle"></i> Livraison en 7 jours</li>
-                        </ul>
-                        <a href="#contact" class="btn">Commander</a>
-                    </div>
-                </div>
-                
-                <div class="section-title" style="margin-top: 80px;">
-                    <h2>Services Complémentaires</h2>
-                    <p>Améliorez votre présence en ligne avec nos services additionnels</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h3>Création de Logo</h3>
-                        <p>Un logo professionnel qui représente votre marque et attire vos clients.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-wrench"></i>
-                        </div>
-                        <h3>Maintenance</h3>
-                        <p>Maintenance continue de votre site web pour garantir son bon fonctionnement.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Référencement SEO</h3>
-                        <p>Optimisation de votre site pour un meilleur classement dans les moteurs de recherche.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Analytics</h3>
-                        <p>Suivi des performances de votre site et analyse du comportement des visiteurs.</p>
-                    </div>
-                </div>
-                
-                <div class="section-title" style="margin-top: 80px;">
-                    <h2>Offre Spéciale Parrainage</h2>
-                    <p>Recommandez-nous et bénéficiez d'avantages exclusifs</p>
-                </div>
-                
-                <div class="feature-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                    <div class="feature-icon">
-                        <i class="fas fa-gift"></i>
-                    </div>
-                    <h3>Parrainez et économisez!</h3>
-                    <p>Pour chaque personne que vous me recommandez et qui me confie un projet, vous bénéficiez d'une réduction de 10 à 20% sur votre prochain site ou sur un service complémentaire (logo, maintenance, page supplémentaire, etc.).</p>
-                    <p style="font-weight: 700; color: var(--primary); margin-top: 20px;">Une offre exceptionnelle pour nos clients fidèles!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Page -->
-        <section id="faq" class="page">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Foire Aux Questions</h2>
-                    <p>Retrouvez les réponses aux questions les plus fréquentes</p>
-                </div>
-                
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Comment se déroule le processus de création d'un site web?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Le processus se déroule en plusieurs étapes :</p>
-                            <ol>
-                                <li>Nous discutons de vos besoins et objectifs</li>
-                                <li>Je vous propose un design et un plan pour votre site</li>
-                                <li>Je développe votre site web selon vos spécifications</li>
-                                <li>Vous examinez le site et demandez des modifications si nécessaire</li>
-                                <li>Une fois satisfait, vous effectuez le paiement</li>
-                                <li>Je mets en ligne votre site et vous forme à son utilisation</li>
-                            </ol>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Quand dois-je effectuer le paiement?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Vous effectuez le paiement uniquement après être entièrement satisfait du résultat final. C'est notre garantie de qualité et de confiance.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Combien de temps faut-il pour créer un site web?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Le délai de livraison dépend du type de site :</p>
-                            <ul>
-                                <li>Mini site vitrine (1 page) : 2 jours</li>
-                                <li>Site complet (3-5 pages) : 5 jours</li>
-                                <li>Mini e-commerce : 7 jours</li>
-                            </ul>
-                            <p>Ces délais peuvent varier en fonction de la complexité du projet.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Proposez-vous l'hébergement et le nom de domaine?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Oui, nous proposons un hébergement gratuit inclus dans tous nos packages. Vous n'aurez pas à payer des frais annuels d'hébergement. Le nom de domaine (votresite.com) peut être inclus à un coût supplémentaire selon sa disponibilité.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Que se passe-t-il si j'ai besoin de modifications après la livraison?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Tous nos packages incluent une maintenance gratuite d'un mois après la livraison. Pendant cette période, vous pouvez demander des modifications mineures sans frais supplémentaires. Après cette période, nous proposons des services de maintenance à des tarifs avantageux.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Proposez-vous des formations pour gérer mon site?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Absolument! Après la livraison de votre site, je vous offre une formation complète pour que vous puissiez gérer votre contenu de manière autonome. Je reste également disponible pour répondre à vos questions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        
-        <!-- Contact Page -->
-        <section id="contact" class="page">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Contactez-Nous</h2>
-                    <p>Discutons de votre projet et obtenez un devis gratuit</p>
-                </div>
-                
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <h3>Restons en contact</h3>
-                        <ul class="contact-details">
-                            <li>
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4>Adresse</h4>
-                                    <p>Bénin</p>
-                                </div>
-                            </li>
-                            
-                            <li>
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div>
-                                    <h4>Téléphone</h4>
-                                    <p>+229 55530826</p>
-                                </div>
-                            </li>
-                            
-                            <li>
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p>contact@afrosite.bj</p>
-                                </div>
-                            </li>
-                        </ul>
-                        
-                        <p style="margin-top: 30px;">Pour les demandes urgentes, contactez-nous directement sur WhatsApp :</p>
-                        <a href="https://wa.me/22955530826?text=Bonjour%20Souraka,%20je%20suis%20intéressé%20par%20vos%20services%20de%20création%20de%20sites%20web" class="whatsapp-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Nous contacter sur WhatsApp
-                        </a>
-                    </div>
-                    
-                    <div class="contact-form-container">
-                        <h3 style="margin-bottom: 20px; text-align: center;">Formulaire de Contact</h3>
-                        <div class="google-form-container">
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfHV7jGSLMDUKN_Ady6GZ1gRXym1tqLqDrSYNDJ39PsRxWRNA/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-   <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <img src="lig.jpg" alt="AfroSite Logo">
-                    </div>
-                    <p>AfroSite propose des services de création de sites web sur mesure au Bénin. Nous vous offrons des designs modernes, responsives et à des tarifs accessibles.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Liens Rapides</h4>
-                    <ul>
-                        <li><a href="#accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services & Prix</a></li>
-                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Nos Services</h4>
-                    <ul>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Mini Site Vitrine</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Site Complet</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Mini E-commerce</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services Complémentaires</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="https://wa.me/22955530826" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                        <li><a href="tel:+22955530826"><i class="fas fa-phone-alt"></i> +229 55530826</a></li>
-                        <li><a href="mailto:contact@afrosite.bj"><i class="fas fa-envelope"></i> contact@afrosite.bj</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Bénin</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 AfroSite - Tous droits réservés. Développé avec <i class="fas fa-heart" style="color: var(--accent);"></i> par Souraka</p>
-            </div>
+          </div>
+          <div class="hero-float2">✅ Pas satisfait = 0 FCFA à payer</div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const menu = document.getElementById('menu');
-        
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('active');
-        });
-        
-        // Navigation between pages
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                const targetId = link.getAttribute('href').substring(1);
-                
-                // Update active link
-                navLinks.forEach(navLink => navLink.classList.remove('active'));
-                link.classList.add('active');
-                
-                // Show target page
-                pages.forEach(page => {
-                    page.classList.remove('active');
-                    if (page.id === targetId) {
-                        page.classList.add('active');
-                    }
-                });
-                
-                // Close mobile menu if open
-                menu.classList.remove('active');
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
-            });
-        });
-        
-        // FAQ Accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // If it's a page link, handle it with our page system
-                    if (targetId === '#accueil' || targetId === '#services' || targetId === '#faq' || targetId === '#contact') {
-                        const pageId = targetId.substring(1);
-                        
-                        // Update active link
-                        navLinks.forEach(navLink => navLink.classList.remove('active'));
-                        document.querySelector(`a[href="${targetId}"]`).classList.add('active');
-                        
-                        // Show target page
-                        pages.forEach(page => {
-                            page.classList.remove('active');
-                            if (page.id === pageId) {
-                                page.classList.add('active');
-                            }
-                        });
-                        
-                        // Close mobile menu if open
-                        menu.classList.remove('active');
-                        
-                        // Scroll to top
-                        window.scrollTo(0, 0);
-                    } else {
-                        // Regular anchor link
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-    </script>
+  <!-- TRUST BAR -->
+  <div class="trust-bar" aria-label="Secteurs d'activité">
+    <div class="tb-inner">
+      <div class="tb-item"><i class="fas fa-utensils"></i> Restaurants</div>
+      <div class="tb-item"><i class="fas fa-chart-line"></i> Traders</div>
+      <div class="tb-item"><i class="fas fa-shopping-bag"></i> Boutiques</div>
+      <div class="tb-item"><i class="fas fa-building"></i> Entreprises</div>
+      <div class="tb-item"><i class="fas fa-graduation-cap"></i> Écoles & ONG</div>
+      <div class="tb-item"><i class="fas fa-user-tie"></i> Consultants</div>
+    </div>
+  </div>
+
+  <!-- PROMISE -->
+  <section class="promise" aria-label="Notre promesse">
+    <div class="wrap">
+      <div class="promise-inner">
+        <div class="promise-left reveal">
+          <span class="eyebrow" style="color:rgba(255,255,255,.35)">Notre engagement</span>
+          <h2 class="display">Vous ne payez<br><em>absolument rien</em><br>avant d'être satisfait.</h2>
+          <p>Cette promesse nous différencie de toutes les autres agences. Pas d'avance. Pas de mauvaise surprise. Notre succès dépend du vôtre.</p>
+        </div>
+        <div class="promise-steps reveal d1">
+          <div class="ps-item"><div class="ps-num">01</div><div class="ps-text"><h4>Vous décrivez votre projet</h4><p>Un simple message WhatsApp. On discute de votre activité, vos besoins, votre vision.</p></div></div>
+          <div class="ps-item"><div class="ps-num">02</div><div class="ps-text"><h4>Je crée votre site complet</h4><p>Design professionnel en 2 à 10 jours selon la formule. Tout inclus, sans supplément.</p></div></div>
+          <div class="ps-item"><div class="ps-num">03</div><div class="ps-text"><h4>Révisions illimitées et gratuites</h4><p>Je retravaille jusqu'à votre satisfaction totale. Sans limite, sans facturation supplémentaire.</p></div></div>
+          <div class="ps-item"><div class="ps-num">04</div><div class="ps-text"><h4>Vous payez. Votre site est en ligne.</h4><p>Seulement après votre validation. Pas avant. Le site est mis en ligne immédiatement.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS CAROUSEL -->
+  <section class="testi-section" aria-label="Avis clients">
+    <div class="testi-header reveal">
+      <span class="eyebrow">Avis clients</span>
+      <h2 class="display" style="margin-bottom:6px;">Ce que disent nos clients</h2>
+      <p style="color:var(--muted);font-size:.97rem;">Note parfaite 5/5 — Chaque avis est authentique.</p>
+    </div>
+    <div class="carousel-wrap">
+      <button class="carousel-arrow arr-prev" id="arrPrev" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Card 1 -->
+          <div class="tcard"><div class="tcard-inner"><div class="tc-stars">★★★★★</div><p class="tc-text">«&nbsp;Mon restaurant est visible partout en ligne. Les clients voient le menu, les photos, et contactent directement. Le résultat a dépassé mes espérances.&nbsp;»</p><div class="tc-author"><div class="tc-av" style="background:#1a73e8">K</div><div><div class="tc-name">Kokou Mensah</div><div class="tc-job">Restaurateur, Cotonou</div></div></div></div></div>
+          <!-- Card 2 -->
+          <div class="tcard"><div class="tcard-inner"><div class="tc-stars">★★★★★</div><p class="tc-text">«&nbsp;J'avais peur des arnaques en ligne. Souraka m'a proposé de payer après. Le site est tellement professionnel que j'ai payé avec plaisir. Je recommande.&nbsp;»</p><div class="tc-author"><div class="tc-av" style="background:#16a34a">F</div><div><div class="tc-name">Fatou Diallo</div><div class="tc-job">Trader, Porto-Novo</div></div></div></div></div>
+          <!-- Card 3 -->
+          <div class="tcard"><div class="tcard-inner"><div class="tc-stars">★★★★★</div><p class="tc-text">«&nbsp;Site livré en 3 jours. Design propre et moderne. Mes clients me disent que le site fait très sérieux. C'est exactement ce que je voulais pour ma boutique.&nbsp;»</p><div class="tc-author"><div class="tc-av" style="background:#ea4335">A</div><div><div class="tc-name">Adjoua Koffi</div><div class="tc-job">Boutique mode, Abomey-Calavi</div></div></div></div></div>
+          <!-- Card 4 -->
+          <div class="tcard"><div class="tcard-inner"><div class="tc-stars">★★★★★</div><p class="tc-text">«&nbsp;Souraka a compris mon activité de trading dès le premier échange. Le site inspire la confiance que mes clients ont besoin de voir avant d'investir.&nbsp;»</p><div class="tc-author"><div class="tc-av" style="background:#d97706">R</div><div><div class="tc-name">Roland Hounkpatin</div><div class="tc-job">Formateur trading, Bénin</div></div></div></div></div>
+          <!-- Card 5 -->
+          <div class="tcard"><div class="tcard-inner"><div class="tc-stars">★★★★★</div><p class="tc-text">«&nbsp;Notre ONG a enfin une image professionnelle. Des partenaires internationaux nous ont contactés directement grâce au site. Investissement parfaitement rentable.&nbsp;»</p><div class="tc-author"><div class="tc-av" style="background:#0891b2">J</div><div><div class="tc-name">Jean-Pierre Agossou</div><div class="tc-job">Directeur ONG, Parakou</div></div></div></div></div>
+        </div>
+      </div>
+      <button class="carousel-arrow arr-next" id="arrNext" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <!-- REAL PROJECTS -->
+  <section class="projects-section" aria-label="Nos réalisations">
+    <div class="wrap">
+      <span class="eyebrow reveal">Nos réalisations</span>
+      <h2 class="display reveal">Des sites qui travaillent<br>pour nos clients</h2>
+      <p class="lead reveal" style="margin-top:12px;">Voici quelques projets que nous avons livrés — chacun avec notre garantie de satisfaction.</p>
+      <div class="proj-grid">
+        <div class="proj-card reveal">
+          <div class="proj-visual pv1">Restafy<div class="pv-overlay"><a href="https://restafy.shop" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body">
+            <div class="proj-cat">Restauration · Plateforme complète</div>
+            <h3>Restafyshop</h3>
+            <p>Plateforme complète de restauration en ligne. Commandes, menus, paiements, gestion en temps réel.</p>
+            <div class="proj-tags"><span class="proj-tag">Commande en ligne</span><span class="proj-tag">Paiement</span><span class="proj-tag">Dashboard</span></div>
+          </div>
+        </div>
+        <div class="proj-card reveal d1">
+          <div class="proj-visual pv2">📈<div class="pv-overlay"><a href="https://mohamed-djibrilla.vercel.app/" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body">
+            <div class="proj-cat">Finance · Trading</div>
+            <h3>Mohamed Djibrilla</h3>
+            <p>Site professionnel pour formateur en trading. Présentation des services, formations, témoignages, contact sécurisé.</p>
+            <div class="proj-tags"><span class="proj-tag">Trading</span><span class="proj-tag">Formations</span><span class="proj-tag">Corporate</span></div>
+          </div>
+        </div>
+        <div class="proj-card reveal d2">
+          <div class="proj-visual pv3">🌐<div class="pv-overlay"><a href="https://afro-site.vercel.app" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body">
+            <div class="proj-cat">Agence web · Vitrine</div>
+            <h3>AfroSite Agency</h3>
+            <p>Notre propre site d'agence. Design épuré, multi-pages, optimisé SEO, formulaire de contact intelligent.</p>
+            <div class="proj-tags"><span class="proj-tag">Multi-pages</span><span class="proj-tag">SEO</span><span class="proj-tag">WhatsApp</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px;">
+        <div class="btn btn-outline nav-link" data-page="realisations">Voir tous nos projets <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <span class="eyebrow reveal">Pourquoi nous choisir</span>
+      <h2 class="display reveal">Ce qui nous distingue</h2>
+      <div class="why-grid">
+        <div class="why-card reveal"><div class="wc-icon"><i class="fas fa-shield-alt"></i></div><h3>Paiement après satisfaction</h3><p>Vous ne payez qu'après avoir validé votre site. Révisions illimitées incluses. C'est notre garantie la plus forte.</p></div>
+        <div class="why-card reveal d1"><div class="wc-icon"><i class="fas fa-star"></i></div><h3>Note parfaite 5/5</h3><p>Tous nos projets obtiennent la note maximale. Une performance constante qui témoigne de notre exigence absolue.</p></div>
+        <div class="why-card reveal d2"><div class="wc-icon"><i class="fas fa-bolt"></i></div><h3>Livraison ultra-rapide</h3><p>Mini vitrine en 2 jours, site complet en 5 jours. Délais garantis ou réduction automatique.</p></div>
+        <div class="why-card reveal"><div class="wc-icon"><i class="fas fa-globe"></i></div><h3>Hébergement gratuit</h3><p>Votre site reste en ligne gratuitement. Aucun abonnement annuel caché. Payez une fois, votre présence est permanente.</p></div>
+        <div class="why-card reveal d1"><div class="wc-icon"><i class="fas fa-infinity"></i></div><h3>Tous types de sites</h3><p>Restaurant, e-commerce, trading, portfolio, institutionnel, application web — nous maîtrisons chaque secteur.</p></div>
+        <div class="why-card reveal d2"><div class="wc-icon"><i class="fas fa-phone"></i></div><h3>Support direct et local</h3><p>Vous parlez directement à Souraka, développeur basé au Bénin. Réponse garantie en moins d'une heure.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip" aria-label="Appel à l'action">
+    <div class="wrap"><div class="cta-inner">
+      <div class="cta-left"><h2>Prêt à lancer votre site ?<br>Aucune avance demandée.</h2><p>On démarre aujourd'hui. Vous validez, alors vous payez.</p></div>
+      <div class="cta-btns">
+        <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20lancer%20mon%20site%20!" class="btn btn-white btn-lg" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp maintenant</a>
+        <div class="btn btn-ghost btn-lg nav-link" data-page="contact">Devis gratuit</div>
+      </div>
+    </div></div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ═══════════ PAGE: SERVICES ═══════════ -->
+<div class="page" id="page-services">
+  <section class="section" style="padding-bottom:0;text-align:center;">
+    <div class="wrap">
+      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex;">Nos services</span>
+      <h1 class="display-xl">Nous créons tout type<br>de <em>site web professionnel</em></h1>
+      <p class="lead" style="margin:18px auto 0;">De la page vitrine simple à la plateforme complexe. Chaque projet livré avec la même garantie de satisfaction.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <span class="eyebrow reveal">Commerces & Restaurants</span>
+      <h2 class="display reveal" style="font-size:1.8rem;margin-bottom:36px;">Pour vendre en ligne 24h/24</h2>
+      <div class="srv-grid">
+        <div class="srv-card reveal"><div class="srv-icon">🍽️</div><h3>Site restaurant</h3><p>Menu en ligne, galerie de plats, réservation WhatsApp, horaires, localisation. Vos clients commandent avant d'entrer.</p><div class="srv-tags"><span class="srv-tag">Menu digital</span><span class="srv-tag">WhatsApp</span><span class="srv-tag">Galerie</span></div></div>
+        <div class="srv-card reveal d1"><div class="srv-icon">🛍️</div><h3>Boutique e-commerce</h3><p>Catalogue produits, panier, paiement Mobile Money, gestion des commandes. Vendez partout au Bénin et en Afrique.</p><div class="srv-tags"><span class="srv-tag">Mobile Money</span><span class="srv-tag">Catalogue</span><span class="srv-tag">Commandes</span></div></div>
+        <div class="srv-card reveal d2"><div class="srv-icon">💅</div><h3>Salon & beauté</h3><p>Portfolio de créations, services, prise de rendez-vous en ligne, localisation. Remplissez votre agenda automatiquement.</p><div class="srv-tags"><span class="srv-tag">Rendez-vous</span><span class="srv-tag">Portfolio</span><span class="srv-tag">Galerie</span></div></div>
+      </div>
+      <span class="eyebrow reveal" style="margin-top:60px;display:block;">Finance & Trading</span>
+      <h2 class="display reveal" style="font-size:1.8rem;margin-bottom:36px;">Pour inspirer confiance</h2>
+      <div class="srv-grid">
+        <div class="srv-card reveal"><div class="srv-icon">📈</div><h3>Site trader professionnel</h3><p>Services, performances, témoignages, formations. Convertit les visiteurs en clients sérieux dès la première visite.</p><div class="srv-tags"><span class="srv-tag">Témoignages</span><span class="srv-tag">Formations</span><span class="srv-tag">Pro</span></div></div>
+        <div class="srv-card reveal d1"><div class="srv-icon">🏦</div><h3>Agence financière</h3><p>Image corporate sérieuse, services, équipe, contact sécurisé. Crédibilité maximale pour vos investisseurs.</p><div class="srv-tags"><span class="srv-tag">Corporate</span><span class="srv-tag">Sécurisé</span></div></div>
+        <div class="srv-card reveal d2"><div class="srv-icon">📊</div><h3>Plateforme de formation</h3><p>Cours en ligne, inscriptions, paiement, espace membre privé. Automatisez la vente de vos formations.</p><div class="srv-tags"><span class="srv-tag">E-learning</span><span class="srv-tag">Membres</span><span class="srv-tag">Paiement</span></div></div>
+      </div>
+      <span class="eyebrow reveal" style="margin-top:60px;display:block;">Entreprises & Institutions</span>
+      <h2 class="display reveal" style="font-size:1.8rem;margin-bottom:36px;">Pour une image à la hauteur</h2>
+      <div class="srv-grid">
+        <div class="srv-card reveal"><div class="srv-icon">🏢</div><h3>Site corporate</h3><p>Image de marque premium, services, équipe, actualités, portfolio. Pour les entreprises qui veulent impressionner.</p><div class="srv-tags"><span class="srv-tag">Premium</span><span class="srv-tag">Blog</span><span class="srv-tag">Multi-pages</span></div></div>
+        <div class="srv-card reveal d1"><div class="srv-icon">🎓</div><h3>École & centre de formation</h3><p>Programmes, inscriptions, emplois du temps, résultats, galeries. L'outil digital complet pour votre établissement.</p><div class="srv-tags"><span class="srv-tag">Inscriptions</span><span class="srv-tag">Programmes</span></div></div>
+        <div class="srv-card reveal d2"><div class="srv-icon">⚙️</div><h3>Application web sur mesure</h3><p>Dashboard, CRM, marketplace, système de gestion. Tout ce dont votre entreprise a besoin, développé pour vous.</p><div class="srv-tags"><span class="srv-tag">CRM</span><span class="srv-tag">Dashboard</span><span class="srv-tag">API</span></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip"><div class="wrap"><div class="cta-inner">
+    <div class="cta-left"><h2>Quel est votre projet ?<br>Discutons-en gratuitement.</h2><p>Un message suffit. Réponse en moins d'une heure.</p></div>
+    <div class="cta-btns"><a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20J%27ai%20un%20projet%20de%20site%20web." class="btn btn-white btn-lg" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Démarrer maintenant</a></div>
+  </div></div></div>
+</div>
+
+<!-- ═══════════ PAGE: TARIFS ═══════════ -->
+<div class="page" id="page-tarifs">
+  <section class="tarifs-hero">
+    <div class="wrap">
+      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex;">Tarifs 2026</span>
+      <h1 class="display-xl">Prix clairs.<br>Aucune surprise.<br>Paiement <em>après.</em></h1>
+      <p class="lead" style="margin:18px auto;">Deux gammes : petites structures &amp; PME / grandes entreprises. Tout est transparent dès le départ.</p>
+      <div class="tarif-switch">
+        <button class="ts-btn active" id="ts-pme" onclick="switchTarif('pme')">🏪 Petites structures & PME</button>
+        <button class="ts-btn" id="ts-ent" onclick="switchTarif('ent')">🏢 Grandes entreprises</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PME -->
+  <div id="tarif-pme">
+    <div class="wrap" style="padding-bottom:30px;">
+      <div style="background:var(--green-bg);border:1px solid var(--green-b);border-radius:var(--r2);padding:14px 20px;display:flex;align-items:center;gap:11px;margin-bottom:36px;">
+        <i class="fas fa-shield-alt" style="color:var(--green);font-size:1rem;flex-shrink:0;"></i>
+        <p style="font-size:.88rem;font-weight:600;color:var(--green);">Garantie absolue : paiement après validation. Révisions illimitées incluses. Hébergement gratuit.</p>
+      </div>
+      <div class="p-grid">
+        <div class="p-card reveal">
+          <div class="p-tier">Mini Vitrine</div>
+          <div class="p-amount"><span class="p-cur">FCFA </span>15 000</div>
+          <div class="p-del"><i class="fas fa-bolt"></i>Livré en 2 jours ouvrables</div>
+          <hr class="p-div">
+          <ul class="p-feats">
+            <li><i class="fas fa-check"></i>1 page responsive et moderne</li>
+            <li><i class="fas fa-check"></i>Design personnalisé à vos couleurs</li>
+            <li><i class="fas fa-check"></i>Bouton WhatsApp intégré</li>
+            <li><i class="fas fa-check"></i>Localisation Google Maps</li>
+            <li><i class="fas fa-check"></i>Hébergement gratuit inclus</li>
+            <li><i class="fas fa-check"></i>Maintenance 1 mois offerte</li>
+            <li><i class="fas fa-check"></i>Paiement après satisfaction</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20la%20Mini%20Vitrine%20%C3%A0%2015%20000%20FCFA." class="p-btn" target="_blank" rel="noopener">Démarrer ce projet</a>
+        </div>
+        <div class="p-card featured reveal">
+          <span class="p-badge">⚡ Le plus populaire</span>
+          <div class="p-tier">Site Professionnel</div>
+          <div class="p-amount"><span class="p-cur">FCFA </span>35 000</div>
+          <div class="p-del"><i class="fas fa-bolt"></i>Livré en 4–5 jours ouvrables</div>
+          <hr class="p-div">
+          <ul class="p-feats">
+            <li><i class="fas fa-check"></i>3 à 5 pages responsive</li>
+            <li><i class="fas fa-check"></i>Design haut de gamme sur mesure</li>
+            <li><i class="fas fa-check"></i>Formulaire de contact fonctionnel</li>
+            <li><i class="fas fa-check"></i>WhatsApp + Appel directs</li>
+            <li><i class="fas fa-check"></i>Galerie photos / vidéos</li>
+            <li><i class="fas fa-check"></i>Section avis clients</li>
+            <li><i class="fas fa-check"></i>Hébergement gratuit inclus</li>
+            <li><i class="fas fa-check"></i>Maintenance 2 mois offerte</li>
+            <li><i class="fas fa-check"></i>Formation à la gestion du site</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20le%20Site%20Professionnel%20%C3%A0%2035%20000%20FCFA." class="p-btn" target="_blank" rel="noopener">Démarrer ce projet</a>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-tier">Boutique E-commerce</div>
+          <div class="p-amount"><span class="p-cur">FCFA </span>75 000</div>
+          <div class="p-del"><i class="fas fa-bolt"></i>Livré en 7–10 jours ouvrables</div>
+          <hr class="p-div">
+          <ul class="p-feats">
+            <li><i class="fas fa-check"></i>Boutique en ligne complète</li>
+            <li><i class="fas fa-check"></i>Jusqu'à 50 produits configurés</li>
+            <li><i class="fas fa-check"></i>Paiement Mobile Money & carte</li>
+            <li><i class="fas fa-check"></i>Gestion des stocks & commandes</li>
+            <li><i class="fas fa-check"></i>Espace client (connexion)</li>
+            <li><i class="fas fa-check"></i>Hébergement gratuit inclus</li>
+            <li><i class="fas fa-check"></i>Maintenance 3 mois offerte</li>
+            <li><i class="fas fa-check"></i>Formation complète (2h)</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20la%20Boutique%20E-commerce%20%C3%A0%2075%20000%20FCFA." class="p-btn" target="_blank" rel="noopener">Démarrer ce projet</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div id="tarif-ent" style="display:none;">
+    <div class="wrap" style="padding-bottom:30px;">
+      <div style="background:var(--gold-bg);border:1px solid var(--gold-b);border-radius:var(--r2);padding:14px 20px;display:flex;align-items:center;gap:11px;margin-bottom:36px;">
+        <i class="fas fa-crown" style="color:var(--gold);font-size:1rem;flex-shrink:0;"></i>
+        <p style="font-size:.88rem;font-weight:600;color:var(--gold);">Solutions sur mesure pour les grandes structures. Contrat professionnel inclus. Devis personnalisé sous 24h.</p>
+      </div>
+      <div class="ent-grid">
+        <div class="ent-card reveal">
+          <span class="ent-badge"><i class="fas fa-building"></i> Entreprise</span>
+          <div class="ent-tier">Site Corporate Premium</div>
+          <div class="ent-price">À partir de 150 000 FCFA</div>
+          <div class="ent-note">Selon les spécifications du projet</div>
+          <ul class="ent-feats">
+            <li><i class="fas fa-check"></i>6 à 10 pages premium</li>
+            <li><i class="fas fa-check"></i>Design exclusif & charte graphique</li>
+            <li><i class="fas fa-check"></i>Blog / système d'actualités</li>
+            <li><i class="fas fa-check"></i>Espace RH (offres d'emploi)</li>
+            <li><i class="fas fa-check"></i>Multilingue (FR + EN)</li>
+            <li><i class="fas fa-check"></i>SEO avancé & Google Analytics</li>
+            <li><i class="fas fa-check"></i>Hébergement premium 1 an</li>
+            <li><i class="fas fa-check"></i>Maintenance 6 mois incluse</li>
+            <li><i class="fas fa-check"></i>Contrat professionnel signé</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20un%20devis%20pour%20un%20site%20corporate%20premium." class="ent-btn" target="_blank" rel="noopener">Demander un devis</a>
+        </div>
+        <div class="ent-card featured reveal">
+          <span class="ent-badge"><i class="fas fa-star"></i> Solution complète</span>
+          <div class="ent-tier">Plateforme Web Sur Mesure</div>
+          <div class="ent-price">À partir de 300 000 FCFA</div>
+          <div class="ent-note">Devis détaillé après analyse du projet</div>
+          <ul class="ent-feats">
+            <li><i class="fas fa-check"></i>Application web complète</li>
+            <li><i class="fas fa-check"></i>Base de données & backend robuste</li>
+            <li><i class="fas fa-check"></i>Système d'authentification</li>
+            <li><i class="fas fa-check"></i>Tableau de bord administrateur</li>
+            <li><i class="fas fa-check"></i>Intégrations API tierces</li>
+            <li><i class="fas fa-check"></i>Paiements automatisés</li>
+            <li><i class="fas fa-check"></i>Notifications push & email</li>
+            <li><i class="fas fa-check"></i>Hébergement cloud dédié</li>
+            <li><i class="fas fa-check"></i>Maintenance 12 mois incluse</li>
+            <li><i class="fas fa-check"></i>SLA & support prioritaire</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20un%20devis%20pour%20une%20plateforme%20web%20sur%20mesure." class="ent-btn" target="_blank" rel="noopener">Demander un devis</a>
+        </div>
+        <div class="ent-card reveal">
+          <span class="ent-badge"><i class="fas fa-infinity"></i> Sur devis</span>
+          <div class="ent-tier">Projet Spécial & Urgent</div>
+          <div class="ent-price">Devis sous 24h</div>
+          <div class="ent-note">Selon urgence et complexité</div>
+          <ul class="ent-feats">
+            <li><i class="fas fa-check"></i>Refonte de site existant</li>
+            <li><i class="fas fa-check"></i>Marketplace multi-vendeurs</li>
+            <li><i class="fas fa-check"></i>Système de réservation avancé</li>
+            <li><i class="fas fa-check"></i>Intégration ERP / CRM</li>
+            <li><i class="fas fa-check"></i>Migration & optimisation de site</li>
+            <li><i class="fas fa-check"></i>Audit SEO complet</li>
+            <li><i class="fas fa-check"></i>PWA / Application web mobile</li>
+            <li><i class="fas fa-check"></i>Tout projet hors normes</li>
+          </ul>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20J%27ai%20un%20projet%20sp%C3%A9cial%20et%20j%27ai%20besoin%20d%27un%20devis%20rapide." class="ent-btn" target="_blank" rel="noopener">Discuter du projet</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE TABLE -->
+  <div class="wrap" style="padding-bottom:80px;">
+    <h3 class="display reveal" style="font-size:1.5rem;margin-bottom:20px;">Comparaison des formules</h3>
+    <table class="compare-table">
+      <thead><tr><th>Fonctionnalité</th><th>Mini Vitrine</th><th>Site Pro</th><th>E-commerce</th><th>Corporate</th><th>Plateforme</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-b">Prix de départ</td><td>15 000 FCFA</td><td>35 000 FCFA</td><td>75 000 FCFA</td><td>150 000 FCFA</td><td>300 000 FCFA</td></tr>
+        <tr><td class="ct-b">Délai livraison</td><td>2 jours</td><td>5 jours</td><td>10 jours</td><td>15 jours</td><td>Sur mesure</td></tr>
+        <tr><td class="ct-b">Pages</td><td>1</td><td>3–5</td><td>5–10</td><td>6–10+</td><td>Illimité</td></tr>
+        <tr><td class="ct-b">Hébergement</td><td class="ct-y">✓ Gratuit</td><td class="ct-y">✓ Gratuit</td><td class="ct-y">✓ Gratuit</td><td class="ct-y">✓ 1 an inclus</td><td class="ct-y">✓ Cloud dédié</td></tr>
+        <tr><td class="ct-b">WhatsApp intégré</td><td class="ct-y">✓</td><td class="ct-y">✓</td><td class="ct-y">✓</td><td class="ct-y">✓</td><td class="ct-y">✓</td></tr>
+        <tr><td class="ct-b">Paiement en ligne</td><td class="ct-n">✗</td><td class="ct-n">✗</td><td class="ct-y">✓</td><td class="ct-y">✓</td><td class="ct-y">✓</td></tr>
+        <tr><td class="ct-b">Multilingue</td><td class="ct-n">✗</td><td class="ct-n">✗</td><td class="ct-n">✗</td><td class="ct-y">✓</td><td class="ct-y">✓</td></tr>
+        <tr><td class="ct-b">Contrat professionnel</td><td class="ct-n">✗</td><td class="ct-n">✗</td><td class="ct-n">✗</td><td class="ct-y">✓</td><td class="ct-y">✓</td></tr>
+        <tr><td class="ct-b">Paiement après satisfaction</td><td class="ct-y">✓ Toujours</td><td class="ct-y">✓ Toujours</td><td class="ct-y">✓ Toujours</td><td class="ct-y">✓ Toujours</td><td class="ct-y">✓ Toujours</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PARRAINAGE -->
+  <div class="parrain-section">
+    <div class="wrap">
+      <div class="parrain-card reveal">
+        <div class="pc-left">
+          <h2>Programme de parrainage</h2>
+          <p>Recommandez AfroSite à un ami ou un collègue qui nous confie un projet — et bénéficiez d'une réduction exclusive sur votre prochain site ou service complémentaire.</p>
+          <div class="pc-steps">
+            <div class="pc-step"><div class="pc-dot">1</div><p><strong>Vous recommandez AfroSite</strong> à une personne de votre entourage.</p></div>
+            <div class="pc-step"><div class="pc-dot">2</div><p>La personne nous contacte et mentionne votre nom.</p></div>
+            <div class="pc-step"><div class="pc-dot">3</div><p><strong>Vous recevez 10 à 20% de réduction</strong> sur votre prochain projet ou service.</p></div>
+          </div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-big">-20%<span class="pc-pct"></span></div>
+          <div class="pc-label">de réduction sur votre prochain site<br>pour chaque parrainage réussi</div>
+          <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20en%20savoir%20plus%20sur%20le%20parrainage." class="pc-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Je veux parrainer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tarifs -->
+
+<!-- ═══════════ PAGE: RÉALISATIONS ═══════════ -->
+<div class="page" id="page-realisations">
+  <section class="section" style="padding-bottom:0;text-align:center;">
+    <div class="wrap">
+      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex;">Réalisations</span>
+      <h1 class="display-xl">Des sites qui font<br><em>vraiment travailler</em><br>nos clients.</h1>
+      <p class="lead" style="margin:18px auto 60px;">Chaque projet livré avec notre garantie absolue de satisfaction. Note 5/5 sur tous les projets.</p>
+      <div class="proj-grid" style="text-align:left;">
+        <div class="proj-card reveal">
+          <div class="proj-visual pv1">🍽️<div class="pv-overlay"><a href="https://restafyshop.vercel.app" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body"><div class="proj-cat">Restauration · Plateforme complète</div><h3>Restafyshop</h3><p>Plateforme complète de restauration en ligne. Commandes, menus digitaux, paiements intégrés, gestion en temps réel pour le restaurateur.</p><div class="proj-tags"><span class="proj-tag">Commande en ligne</span><span class="proj-tag">Paiement</span><span class="proj-tag">Dashboard</span><span class="proj-tag">Responsive</span></div></div>
+        </div>
+        <div class="proj-card reveal d1">
+          <div class="proj-visual pv2">📈<div class="pv-overlay"><a href="https://mohamed-djibrilla.vercel.app/" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body"><div class="proj-cat">Finance · Trading</div><h3>Mohamed Djibrilla</h3><p>Site professionnel pour formateur en trading. Présentation claire des services, formations proposées, témoignages clients, formulaire de contact sécurisé.</p><div class="proj-tags"><span class="proj-tag">Trading</span><span class="proj-tag">Formations</span><span class="proj-tag">Corporate</span><span class="proj-tag">SEO</span></div></div>
+        </div>
+        <div class="proj-card reveal d2">
+          <div class="proj-visual pv3">🌐<div class="pv-overlay"><a href="https://afro-site.vercel.app" target="_blank" rel="noopener" class="pv-link"><i class="fas fa-external-link-alt"></i> Voir le site</a></div></div>
+          <div class="proj-body"><div class="proj-cat">Agence web · Vitrine professionnelle</div><h3>AfroSite Agency</h3><p>Notre propre site d'agence. Design épuré blanc style Apple, multi-pages, SEO optimisé, formulaire de contact intelligent via WhatsApp.</p><div class="proj-tags"><span class="proj-tag">Multi-pages</span><span class="proj-tag">SEO</span><span class="proj-tag">WhatsApp</span><span class="proj-tag">Responsive</span></div></div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:24px;margin-top:40px;text-align:center;" class="reveal">
+        <p style="font-size:.97rem;color:var(--muted);">Et bien d'autres projets réalisés au Bénin et en Afrique. <a href="https://wa.me/22955530826?text=Bonjour%20Souraka%20!%20Je%20veux%20voir%20plus%20de%20r%C3%A9alisations." target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Demandez-nous le portfolio complet →</a></p>
+      </div>
+    </div>
+  </section>
+  <!-- Avis -->
+  <section class="section" style="background:var(--surface);">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:50px;align-items:center;margin-bottom:52px;" class="reveal">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:5.5rem;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-3px;">5.0</div>
+          <div style="color:#f59e0b;font-size:1.3rem;letter-spacing:2px;margin:7px 0;">★★★★★</div>
+          <div style="font-size:.82rem;color:var(--muted);">Note parfaite<br>sur tous les projets</div>
+        </div>
+        <div>
+          <h2 class="display" style="font-size:1.7rem;margin-bottom:20px;">100% de clients satisfaits.<br>Sans exception.</h2>
+          <div style="max-width:360px;">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="font-size:.8rem;color:var(--muted);width:62px;text-align:right;">5 étoiles</span><div style="flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;"><div style="height:100%;background:#f59e0b;border-radius:3px;width:100%;"></div></div><span style="font-size:.78rem;font-weight:700;">✓</span></div>
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><span style="font-size:.8rem;color:var(--muted);width:62px;text-align:right;">4 étoiles</span><div style="flex:1;height:5px;background:var(--border);border-radius:3px;"></div><span style="font-size:.78rem;font-weight:700;color:var(--muted);">0</span></div>
+            <div style="display:flex;align-items:center;gap:11px;"><span style="font-size:.8rem;color:var(--muted);width:62px;text-align:right;">1–3 étoiles</span><div style="flex:1;height:5px;background:var(--border);border-radius:3px;"></div><span style="font-size:.78rem;font-weight:700;color:var(--muted);">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /realisations -->
+
+<!-- ═══════════ PAGE: CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <div class="wrap">
+    <div style="padding-top:60px;margin-bottom:10px;" class="reveal">
+      <span class="tag tag-green" style="margin-bottom:18px;display:inline-flex;"><i class="fas fa-star"></i> Réponse garantie en moins d'une heure</span>
+      <h1 class="display-xl">Parlons de<br>votre <em>projet.</em></h1>
+      <p class="lead" style="margin-top:14px;">Devis gratuit, sans engagement. Je vous explique exactement ce que je peux faire pour vous et à quel prix.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cg-left reveal">
+        <h2>Souraka vous répond personnellement</h2>
+        <p class="lead">Développeur basé au Bénin, je gère chaque projet de A à Z. Vous parlez directement à la personne qui crée votre site.</p>
+        <div class="c-methods">
+          <a href="https://wa.me/22955530826" class="c-method" target="_blank" rel="noopener"><div class="c-icon ci-wa"><i class="fab fa-whatsapp"></i></div><div class="c-text"><strong>WhatsApp — Le plus rapide</strong><span>+229 55 53 08 26 · Réponse en &lt; 1h</span></div><i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:.78rem;"></i></a>
+          <a href="tel:+22955530826" class="c-method"><div class="c-icon ci-ph"><i class="fas fa-phone"></i></div><div class="c-text"><strong>Appel téléphonique</strong><span>+229 55 53 08 26</span></div><i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:.78rem;"></i></a>
+          <a href="mailto:contact@afrosite.bj" class="c-method"><div class="c-icon ci-em"><i class="fas fa-envelope"></i></div><div class="c-text"><strong>Email</strong><span>contact@afrosite.bj</span></div><i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:.78rem;"></i></a>
+        </div>
+        <div class="spm">
+          <div class="spm-stars">★★★★★</div>
+          <p class="spm-text">«&nbsp;Souraka répond en moins d'une heure et livre exactement ce qu'il promet. Le rapport qualité/prix est imbattable au Bénin.&nbsp;»</p>
+          <p class="spm-auth">— Roland Hounkpatin, Formateur en trading</p>
+        </div>
+      </div>
+      <div class="c-form reveal d1">
+        <div class="cf-h">Demande de devis gratuit</div>
+        <div class="cf-s">Remplissez le formulaire — je vous réponds avec un devis complet sous 2h.</div>
+        <form id="contactForm" onsubmit="sendToWA(event)">
+          <div class="form-row">
+            <div class="fg"><label>Votre nom complet *</label><input type="text" id="cf-name" placeholder="Ex : Kokou Mensah" required></div>
+            <div class="fg"><label>WhatsApp / Téléphone *</label><input type="tel" id="cf-phone" placeholder="+229 XX XX XX XX" required></div>
+          </div>
+          <div class="fg"><label>Votre secteur d'activité</label><input type="text" id="cf-sector" placeholder="Ex : Restaurant, Trading, Boutique..."></div>
+          <div class="fg"><label>Type de site souhaité</label>
+            <select id="cf-type">
+              <option value="">-- Choisissez --</option>
+              <option>Mini Vitrine (15 000 FCFA)</option>
+              <option>Site Professionnel (35 000 FCFA)</option>
+              <option>Boutique E-commerce (75 000 FCFA)</option>
+              <option>Site Corporate Premium (à partir de 150 000 FCFA)</option>
+              <option>Plateforme sur mesure (à partir de 300 000 FCFA)</option>
+              <option>Je ne sais pas encore — besoin de conseils</option>
+            </select>
+          </div>
+          <div class="fg"><label>Décrivez votre projet</label><textarea id="cf-desc" placeholder="Votre activité, ce que vous voulez sur le site, vos couleurs, un exemple de site que vous aimez..."></textarea></div>
+          <button type="submit" class="f-submit"><i class="fab fa-whatsapp"></i> Envoyer via WhatsApp</button>
+          <p class="f-note"><i class="fas fa-lock" style="color:var(--green);"></i> Vos données sont confidentielles. Réponse garantie sous 2h.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- FAQ -->
+  <section class="section" style="background:var(--surface);padding-top:80px;">
+    <div class="wrap">
+      <span class="eyebrow reveal">Questions fréquentes</span>
+      <h2 class="display reveal" style="font-size:1.8rem;margin-bottom:8px;">On répond à tout</h2>
+      <div class="faq-grid">
+        <div class="faq-item reveal"><div class="faq-q">Est-ce que je paye vraiment après ?<i class="fas fa-plus"></i></div><div class="faq-a">Oui, toujours. Vous ne payez qu'après avoir vu et validé votre site. Pas un seul franc avant. C'est une promesse ferme valable pour toutes les formules, sans exception.</div></div>
+        <div class="faq-item reveal d1"><div class="faq-q">Les révisions sont vraiment illimitées ?<i class="fas fa-plus"></i></div><div class="faq-a">Oui. Jusqu'à votre validation finale, je modifie autant de fois que nécessaire : couleurs, textes, mise en page, sections entières. Sans limite et sans supplément.</div></div>
+        <div class="faq-item reveal"><div class="faq-q">L'hébergement est vraiment gratuit ?<i class="fas fa-plus"></i></div><div class="faq-a">Oui. Votre site reste en ligne gratuitement pour les formules PME. Pas d'abonnement annuel caché. Pour les formules Entreprise, une durée définie est précisée dans le contrat.</div></div>
+        <div class="faq-item reveal d1"><div class="faq-q">Je ne connais rien à la technologie ?<i class="fas fa-plus"></i></div><div class="faq-a">Pas du tout un problème. Vous me donnez vos informations (textes, photos, ce que vous faites) et je crée tout. Je vous forme ensuite en 30 minutes pour les mises à jour simples.</div></div>
+        <div class="faq-item reveal"><div class="faq-q">Vous créez des sites pour les traders ?<i class="fas fa-plus"></i></div><div class="faq-a">Oui, c'est l'un de nos domaines de spécialité. Nous avons déjà créé des sites pour des formateurs en trading au Bénin. Nous savons exactement ce dont ces sites ont besoin pour inspirer confiance.</div></div>
+        <div class="faq-item reveal d1"><div class="faq-q">Quel délai pour démarrer mon projet ?<i class="fas fa-plus"></i></div><div class="faq-a">Vous m'envoyez un message aujourd'hui, on discute dans la journée, et je démarre votre site dès le lendemain. Pas de délai d'attente inutile.</div></div>
+      </div>
+    </div>
+  </section>
+</div><!-- /contact -->
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap ft-top">
+    <div>
+      <div class="ft-logo">Afro<em>Site</em></div>
+      <p class="ft-tag">Agence de création de sites web professionnels au Bénin. Tous types de projets. Paiement après satisfaction garantie.</p>
+      <a href="https://wa.me/22955530826" class="ft-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Nous contacter</a>
+    </div>
+    <div class="ft-col"><h5>Navigation</h5><a class="nav-link" data-page="home">Accueil</a><a class="nav-link" data-page="services">Services</a><a class="nav-link" data-page="tarifs">Tarifs</a><a class="nav-link" data-page="realisations">Réalisations</a><a class="nav-link" data-page="contact">Contact</a></div>
+    <div class="ft-col"><h5>Services</h5><a class="nav-link" data-page="services">Sites restaurant</a><a class="nav-link" data-page="services">Sites trader</a><a class="nav-link" data-page="services">E-commerce</a><a class="nav-link" data-page="services">Sites corporate</a><a class="nav-link" data-page="services">Plateformes web</a></div>
+    <div class="ft-col"><h5>Contact</h5><a href="https://wa.me/22955530826" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="tel:+22955530826"><i class="fas fa-phone"></i> +229 55 53 08 26</a><a href="mailto:contact@afrosite.bj"><i class="fas fa-envelope"></i> contact@afrosite.bj</a><a><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin 🇧🇯</a></div>
+  </div>
+  <div class="wrap ft-bottom">
+    <p>© 2026 AfroSite Agency — Tous droits réservés.</p>
+    <div class="ft-rating"><span class="ft-stars">★★★★★</span><span>Note parfaite 5/5</span></div>
+  </div>
+</footer>
+
+<script>
+/* ── ROUTER */
+function goTo(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('page-'+pageId);
+  if(pg){pg.classList.add('active');}
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('[data-page="'+pageId+'"]').forEach(l=>l.classList.add('active'));
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navLinks').classList.remove('open');
+  // re-observe
+  setTimeout(()=>{ pg.querySelectorAll('.reveal:not(.v)').forEach(el=>observer.observe(el)); },50);
+}
+document.querySelectorAll('.nav-link,[data-page]').forEach(el=>{
+  el.addEventListener('click',function(e){
+    if(this.dataset.page){ e.preventDefault(); goTo(this.dataset.page); }
+  });
+});
+
+/* ── NAV */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+
+/* ── REVEAL ON SCROLL */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('v'); observer.unobserve(e.target); }});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ── CAROUSEL */
+const track=document.getElementById('carouselTrack');
+const cards=track.querySelectorAll('.tcard');
+const dotsWrap=document.getElementById('carouselDots');
+let curr=0;
+let perView=window.innerWidth>768?3:1;
+let total=cards.length;
+let maxSlide=total-perView;
+let autoTimer;
+
+// Build dots
+function buildDots(){
+  dotsWrap.innerHTML='';
+  const dotCount=maxSlide+1;
+  for(let i=0;i<=maxSlide;i++){
+    const d=document.createElement('button');
+    d.className='dot'+(i===curr?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.addEventListener('click',()=>goSlide(i));
+    dotsWrap.appendChild(d);
+  }
+}
+function updateDots(){
+  dotsWrap.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===curr));
+}
+function goSlide(n){
+  curr=Math.max(0,Math.min(n,maxSlide));
+  const w=100/perView;
+  track.style.transform=`translateX(-${curr*w}%)`;
+  updateDots();
+  resetAuto();
+}
+document.getElementById('arrPrev').addEventListener('click',()=>goSlide(curr-1));
+document.getElementById('arrNext').addEventListener('click',()=>goSlide(curr===maxSlide?0:curr+1));
+
+// Auto-play
+function startAuto(){ autoTimer=setInterval(()=>goSlide(curr===maxSlide?0:curr+1),3500); }
+function resetAuto(){ clearInterval(autoTimer); startAuto(); }
+track.addEventListener('mouseenter',()=>clearInterval(autoTimer));
+track.addEventListener('mouseleave',()=>startAuto());
+
+// Touch swipe
+let tx=0;
+track.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+track.addEventListener('touchend',e=>{ const dx=tx-e.changedTouches[0].clientX; if(Math.abs(dx)>40) goSlide(dx>0?curr+1:curr-1); },{passive:true});
+
+// Resize
+window.addEventListener('resize',()=>{
+  perView=window.innerWidth>768?3:1;
+  maxSlide=total-perView;
+  curr=Math.min(curr,maxSlide);
+  buildDots(); goSlide(curr);
+});
+buildDots(); startAuto();
+
+/* ── TARIF SWITCH */
+function switchTarif(t){
+  document.getElementById('tarif-pme').style.display=t==='pme'?'block':'none';
+  document.getElementById('tarif-ent').style.display=t==='ent'?'block':'none';
+  document.getElementById('ts-pme').classList.toggle('active',t==='pme');
+  document.getElementById('ts-ent').classList.toggle('active',t==='ent');
+}
+
+/* ── FAQ */
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+
+/* ── FORM → WA */
+function sendToWA(e){
+  e.preventDefault();
+  const n=document.getElementById('cf-name').value;
+  const p=document.getElementById('cf-phone').value;
+  const s=document.getElementById('cf-sector').value||'Non précisé';
+  const t=document.getElementById('cf-type').value||'Non précisé';
+  const d=document.getElementById('cf-desc').value||'Non précisé';
+  const msg=`Bonjour Souraka ! Je vous contacte via AfroSite.\n\n👤 Nom : ${n}\n📱 Tél : ${p}\n🏪 Secteur : ${s}\n🌐 Type de site : ${t}\n\n📝 Projet :\n${d}`;
+  window.open('https://wa.me/22955530826?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
 </body>
 </html>
