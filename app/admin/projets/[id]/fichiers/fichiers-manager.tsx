@@ -18,6 +18,8 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
   const [newFileName, setNewFileName] = useState("")
   const [newFileType, setNewFileType] = useState("html")
   const [newFileContent, setNewFileContent] = useState("")
+  const [shareLink, setShareLink] = useState<string | null>(null)
+  const [sharingFichier, setSharingFichier] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -141,6 +143,46 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
     if (type === "css") return "text-blue-500"
     if (type === "js") return "text-yellow-500"
     return "text-gray-500"
+  }
+
+  const formatSize = (bytes: number | null) => {
+    if (!bytes) return "0 B"
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+  }
+
+  const handleGenerateShareLink = async (fichier: Fichier) => {
+    const supabase = createClient()
+    
+    try {
+      const response = await fetch("/api/partage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fichier_id: fichier.id,
+          nom: fichier.nom,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setShareLink(data.share_link)
+        setSharingFichier(fichier.id)
+      }
+    } catch (error) {
+      console.error("Error generating share link:", error)
+    }
+  }
+
+  const handleCopyShareLink = () => {
+    if (shareLink) {
+      navigator.clipboard.writeText(shareLink)
+      alert("Lien copié dans le presse-papiers!")
+    }
   }
 
   const formatSize = (bytes: number | null) => {
@@ -336,6 +378,15 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
                         </svg>
                       </button>
                       <button
+                        onClick={() => handleGenerateShareLink(fichier)}
+                        className="rounded-lg p-2 text-muted hover:bg-secondary hover:text-foreground transition-colors"
+                        title="Partager"
+                      >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.769-.283 1.093m0-2.186v4.372m0-4.372a2.25 2.25 0 1 1 0 2.186m0-2.186l5.566-2.783a2.25 2.25 0 0 0 0-1.886L7.217 5.721m0 0a2.25 2.25 0 1 0 0-2.186m0 2.186L12.783 7.5m0 0 5.566-2.783a2.25 2.25 0 0 1 0 1.886l-5.566 2.783m0 0 5.566 2.783a2.25 2.25 0 0 0 0-1.886" />
+                        </svg>
+                      </button>
+                      <button
                         onClick={() => handleDeleteFile(fichier.id)}
                         className="rounded-lg p-2 text-muted hover:bg-destructive/10 hover:text-destructive transition-colors"
                         title="Supprimer"
@@ -352,6 +403,41 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
           </table>
         )}
       </div>
+
+      {/* Share link modal */}
+      {shareLink && sharingFichier && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="rounded-xl border border-border bg-white p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Lien de partage généré</h3>
+            <p className="text-sm text-muted mb-4">
+              Partagez ce lien avec votre client. Il pourra voir et télécharger le fichier.
+            </p>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={shareLink}
+                readOnly
+                className="flex-1 rounded-lg border border-input bg-background px-4 py-2 text-sm text-foreground"
+              />
+              <button
+                onClick={handleCopyShareLink}
+                className="rounded-lg bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors"
+              >
+                Copier
+              </button>
+            </div>
+            <button
+              onClick={() => {
+                setShareLink(null)
+                setSharingFichier(null)
+              }}
+              className="w-full rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
