@@ -16,6 +16,15 @@ const navItems = [
     ),
   },
   {
+    name: "Équipe",
+    href: "/admin/team",
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.75H6v-1.5m10.5-11.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0m-9 8.25h13.5c.825 0 1.5.675 1.5 1.5V18a1.5 1.5 0 01-1.5 1.5H3a1.5 1.5 0 01-1.5-1.5v-4.5c0-.825.675-1.5 1.5-1.5z" />
+      </svg>
+    ),
+  },
+  {
     name: "Clients",
     href: "/admin/clients",
     icon: (
