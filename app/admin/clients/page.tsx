@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import Link from "next/link"
 import { DeleteClientButton } from "./delete-button"
+import { QuickAddClient } from "./quick-add"
 
 async function getClients() {
   const supabase = await createClient()
@@ -36,6 +37,11 @@ export default async function ClientsPage() {
           </svg>
           Nouveau client
         </Link>
+      </div>
+
+      <div className="mb-8 rounded-xl border border-border bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-foreground mb-4">➕ Ajouter rapidement</h2>
+        <QuickAddClient />
       </div>
 
       <div className="rounded-xl border border-border bg-card overflow-hidden">
