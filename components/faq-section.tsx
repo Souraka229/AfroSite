@@ -33,42 +33,45 @@ export function FAQSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 bg-secondary">
+    <section className="py-32 bg-white">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+            FAQ
+          </span>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl text-balance">
             Questions Fréquentes
           </h2>
-          <p className="mt-4 text-base text-muted text-pretty">
-            Les réponses à vos questions les plus courantes.
+          <p className="mt-6 text-lg text-muted text-pretty max-w-xl mx-auto">
+            Les réponses à vos questions les plus courantes sur nos services.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-3xl space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="rounded border border-border bg-white overflow-hidden transition-all"
+              className="rounded-xl border border-border bg-white overflow-hidden transition-all hover:border-primary/30 hover:shadow-md"
             >
               <button
                 onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-secondary transition-colors"
+                className="w-full px-6 sm:px-8 py-5 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
               >
-                <h3 className="text-sm font-semibold text-foreground">{faq.question}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">{faq.question}</h3>
                 <svg
-                  className={`h-5 w-5 text-muted transition-transform ${
+                  className={`h-5 w-5 text-primary flex-shrink-0 ml-4 transition-transform ${
                     activeIndex === index ? "rotate-180" : ""
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
+                  strokeWidth={2.5}
                   stroke="currentColor"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
               {activeIndex === index && (
-                <div className="px-6 pb-4 border-t border-border">
-                  <p className="text-xs text-muted leading-relaxed">{faq.answer}</p>
+                <div className="px-6 sm:px-8 pb-5 border-t border-border bg-slate-50">
+                  <p className="text-sm sm:text-base text-muted leading-relaxed">{faq.answer}</p>
                 </div>
               )}
             </div>
