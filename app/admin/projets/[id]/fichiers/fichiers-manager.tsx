@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/client"
 import { Fichier } from "@/lib/types"
 import { useRouter } from "next/navigation"
 import { useState, useRef } from "react"
-import { generateSlug } from "@/lib/slug"
 
 interface FichiersManagerProps {
   projetId: string
@@ -31,19 +30,20 @@ export function FichiersManager({ projetId, projetNom, initialFichiers }: Fichie
     if (!files || files.length === 0) return
 
     setIsUploading(true)
-    const supabase = createClient()
 
     for (const file of Array.from(files)) {
-      const content = await file.text()
-      const fileType = file.name.split(".").pop() || "html"
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("projetId", projetId)
 
-      await supabase.from("fichiers").insert({
-        projet_id: projetId,
-        nom: file.name,
-        type: fileType,
-        contenu: content,
-        taille: file.size,
-      })
+      try {
+        await fetch("/api/upload-site-file", {
+          method: "POST",
+          body: formData,
+        })
+      } catch (error) {
+        console.error("Upload error:", error)
+      }
     }
 
     router.refresh()
@@ -51,14 +51,15 @@ export function FichiersManager({ projetId, projetNom, initialFichiers }: Fichie
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
-    
+
     // Reload fichiers
+    const supabase = createClient()
     const { data } = await supabase
       .from("fichiers")
       .select("*")
       .eq("projet_id", projetId)
       .order("created_at", { ascending: false })
-    
+
     if (data) setFichiers(data)
   }
 
@@ -190,8 +191,7 @@ export function FichiersManager({ projetId, projetNom, initialFichiers }: Fichie
 
   const handleGenerateSiteLink = () => {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-    const slug = generateSlug(projetNom)
-    const siteUrl = `${baseUrl}/s/${slug}`
+    const siteUrl = `${baseUrl}/preview-site/${projetId}`
     setSiteShareLink(siteUrl)
   }
 
