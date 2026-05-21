@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { WhatsappPitchButton } from "@/components/whatsapp-pitch-button"
+import { ShareProjectButton } from "@/components/share-project-button"
 
 interface EditProjetFormProps {
   projet: Projet
@@ -294,6 +295,12 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
             </div>
           </div>
 
+          {/* Sharing */}
+          <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-4">📤 Partager avec le client</h3>
+            <ShareProjectButton projectId={projet.id} projectName={nom} />
+          </div>
+
           {/* Actions */}
           <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
             <h3 className="text-lg font-bold text-foreground mb-4">Actions</h3>
@@ -312,16 +319,6 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
               >
                 <span>👁️</span> Voir l'aperçu
               </a>
-              <button
-                onClick={() => {
-                  const url = `${window.location.origin}/preview/${projet.id}`
-                  navigator.clipboard.writeText(url)
-                  alert('Lien copié!')
-                }}
-                className="flex items-center gap-2 w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-sm font-medium text-foreground transition-colors"
-              >
-                <span>🔗</span> Copier lien client
-              </button>
             </div>
           </div>
 
