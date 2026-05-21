@@ -20,6 +20,7 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
   const [newFileContent, setNewFileContent] = useState("")
   const [shareLink, setShareLink] = useState<string | null>(null)
   const [sharingFichier, setSharingFichier] = useState<string | null>(null)
+  const [siteShareLink, setSiteShareLink] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -185,11 +186,30 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
     }
   }
 
+  const handleGenerateSiteLink = () => {
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
+    const siteUrl = `${baseUrl}/site/${projetId}`
+    setSiteShareLink(siteUrl)
+  }
+
+  const handleCopySiteLink = () => {
+    if (siteShareLink) {
+      navigator.clipboard.writeText(siteShareLink)
+      alert("Lien du site copié!")
+    }
+  }
+
+  const handleShareViWhatsapp = () => {
+    if (!siteShareLink) return
+    const message = encodeURIComponent(`Voici votre site web: ${siteShareLink}`)
+    window.open(`https://wa.me/22955530826?text=${message}`, "_blank")
+  }
+
 
   return (
     <div className="space-y-6">
       {/* Actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-wrap">
         <input
           ref={fileInputRef}
           type="file"
@@ -216,6 +236,15 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
           Creer un fichier
+        </button>
+        <button
+          onClick={handleGenerateSiteLink}
+          className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.769-.283 1.093m0-2.186v4.372m0-4.372a2.25 2.25 0 1 1 0 2.186m0-2.186l5.566-2.783a2.25 2.25 0 0 0 0-1.886L7.217 5.721m0 0a2.25 2.25 0 1 0 0-2.186m0 2.186L12.783 7.5m0 0 5.566-2.783a2.25 2.25 0 0 1 0 1.886l-5.566 2.783m0 0 5.566 2.783a2.25 2.25 0 0 0 0-1.886" />
+          </svg>
+          Partager le site
         </button>
       </div>
 
@@ -425,6 +454,56 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
                 setShareLink(null)
                 setSharingFichier(null)
               }}
+              className="w-full rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Site share modal */}
+      {siteShareLink && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="rounded-xl border border-border bg-white p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-foreground mb-4">🌐 Partager le site</h3>
+            <p className="text-sm text-muted mb-4">
+              Partagez ce lien avec votre client pour qu'il puisse voir le site en direct.
+            </p>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={siteShareLink}
+                readOnly
+                className="flex-1 rounded-lg border border-input bg-background px-4 py-2 text-sm text-foreground font-mono"
+              />
+              <button
+                onClick={handleCopySiteLink}
+                className="rounded-lg bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors"
+              >
+                Copier
+              </button>
+            </div>
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={handleShareViWhatsapp}
+                className="flex-1 rounded-lg bg-green-600 text-white px-4 py-2 text-sm font-medium hover:bg-green-700 transition-colors"
+              >
+                💬 WhatsApp
+              </button>
+              <button
+                onClick={() => {
+                  if (siteShareLink) {
+                    window.open(siteShareLink, "_blank")
+                  }
+                }}
+                className="flex-1 rounded-lg bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700 transition-colors"
+              >
+                👁️ Aperçu
+              </button>
+            </div>
+            <button
+              onClick={() => setSiteShareLink(null)}
               className="w-full rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary transition-colors"
             >
               Fermer
