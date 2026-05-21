@@ -56,45 +56,15 @@ export async function GET(
       )
     }
 
-    // Sanitize HTML to prevent XSS attacks
-    const sanitizedHtml = sanitizeHtml(htmlFile.contenu)
-
-    return Response.json({ html: sanitizedHtml })
+    // Serve HTML as-is without modifications
+    return new Response(htmlFile.contenu, {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "public, max-age=3600",
+      },
+    })
   } catch (error) {
     console.error("Erreur API site:", error)
-    return Response.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
-    )
+    return new Response("Erreur serveur", { status: 500 })
   }
-}
-
-function sanitizeHtml(html: string): string {
-  // Remove dangerous scripts that could compromise security
-  let sanitized = html
-
-  // Remove inline event handlers
-  sanitized = sanitized.replace(/\s*on\w+\s*=\s*["'][^"']*["']/gi, "")
-  sanitized = sanitized.replace(/\s*on\w+\s*=\s*[^\s>]*/gi, "")
-
-  // Allow safe script tags (but strip dangerous ones)
-  // Keep script tags but ensure they're only for analytics or safe libraries
-  // Remove scripts that fetch to external dangerous domains
-  sanitized = sanitized.replace(
-    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    (match) => {
-      // Allow analytics and safe libraries
-      if (
-        match.includes("analytics") ||
-        match.includes("cdn.jsdelivr.net") ||
-        match.includes("unpkg.com")
-      ) {
-        return match
-      }
-      // Remove other scripts for safety
-      return ""
-    }
-  )
-
-  return sanitized
 }

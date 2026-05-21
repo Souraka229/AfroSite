@@ -4,13 +4,15 @@ import { createClient } from "@/lib/supabase/client"
 import { Fichier } from "@/lib/types"
 import { useRouter } from "next/navigation"
 import { useState, useRef } from "react"
+import { generateSlug } from "@/lib/slug"
 
 interface FichiersManagerProps {
   projetId: string
+  projetNom: string
   initialFichiers: Fichier[]
 }
 
-export function FichiersManager({ projetId, initialFichiers }: FichiersManagerProps) {
+export function FichiersManager({ projetId, projetNom, initialFichiers }: FichiersManagerProps) {
   const [fichiers, setFichiers] = useState<Fichier[]>(initialFichiers)
   const [isUploading, setIsUploading] = useState(false)
   const [showEditor, setShowEditor] = useState(false)
@@ -188,7 +190,8 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
 
   const handleGenerateSiteLink = () => {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : ""
-    const siteUrl = `${baseUrl}/site/${projetId}`
+    const slug = generateSlug(projetNom)
+    const siteUrl = `${baseUrl}/s/${slug}`
     setSiteShareLink(siteUrl)
   }
 
@@ -465,24 +468,27 @@ export function FichiersManager({ projetId, initialFichiers }: FichiersManagerPr
       {/* Site share modal */}
       {siteShareLink && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="rounded-xl border border-border bg-white p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4">🌐 Partager le site</h3>
+          <div className="rounded-xl border border-border bg-white p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-semibold text-foreground mb-4">🌐 Lien du site</h3>
             <p className="text-sm text-muted mb-4">
-              Partagez ce lien avec votre client pour qu'il puisse voir le site en direct.
+              URL personnalisée basée sur le nom de votre projet. Le site est servi directement en HTML.
             </p>
-            <div className="flex gap-2 mb-4">
-              <input
-                type="text"
-                value={siteShareLink}
-                readOnly
-                className="flex-1 rounded-lg border border-input bg-background px-4 py-2 text-sm text-foreground font-mono"
-              />
-              <button
-                onClick={handleCopySiteLink}
-                className="rounded-lg bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors"
-              >
-                Copier
-              </button>
+            <div className="space-y-2 mb-4">
+              <label className="text-xs font-semibold text-muted uppercase">URL du site</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={siteShareLink}
+                  readOnly
+                  className="flex-1 rounded-lg border border-input bg-background px-4 py-2 text-sm text-foreground font-mono"
+                />
+                <button
+                  onClick={handleCopySiteLink}
+                  className="rounded-lg bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors whitespace-nowrap"
+                >
+                  Copier
+                </button>
+              </div>
             </div>
             <div className="flex gap-2 mb-4">
               <button

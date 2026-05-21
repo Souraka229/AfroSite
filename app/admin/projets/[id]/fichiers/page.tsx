@@ -47,7 +47,7 @@ export default async function FichiersPage({
         </p>
       </div>
 
-      <FichiersManager projetId={id} initialFichiers={fichiers} />
+      <FichiersManager projetId={id} projetNom={projet.nom} initialFichiers={fichiers} />
     </div>
   )
 }
