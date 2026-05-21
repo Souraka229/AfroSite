@@ -83,66 +83,159 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-foreground">Tableau de bord</h1>
-        <p className="mt-1 text-sm text-muted">Bienvenue dans votre espace d&apos;administration AfroSite</p>
+    <div className="space-y-8">
+      {/* En-tête */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Tableau de bord</h1>
+          <p className="mt-2 text-sm text-muted">Gérez vos projets et collaborez avec vos clients en temps réel</p>
+        </div>
+        <Link
+          href="/admin/projets/nouveau"
+          className="inline-flex items-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl"
+        >
+          + Nouveau projet
+        </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+      {/* Statistiques */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {statCards.map((stat) => (
           <Link
             key={stat.name}
             href={stat.href}
-            className="group flex items-center gap-4 rounded-xl border border-border bg-card p-6 transition-all hover:shadow-lg hover:border-primary/50"
+            className="group flex flex-col rounded-xl border border-border bg-white p-6 transition-all hover:shadow-lg hover:border-primary/50"
           >
-            <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.color} text-white`}>
-              {stat.icon}
-            </div>
-            <div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className={`flex h-14 w-14 items-center justify-center rounded-xl ${stat.color} text-white shadow-lg`}>
+                {stat.icon}
+              </div>
               <p className="text-sm font-medium text-muted">{stat.name}</p>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
             </div>
+            <p className="text-4xl font-bold text-foreground">{stat.value}</p>
           </Link>
         ))}
       </div>
 
-      <div className="rounded-xl border border-border bg-card">
-        <div className="flex items-center justify-between border-b border-border px-6 py-4">
-          <h2 className="text-lg font-semibold text-foreground">Projets recents</h2>
-          <Link
-            href="/admin/projets"
-            className="text-sm font-medium text-primary hover:underline"
-          >
-            Voir tout
-          </Link>
-        </div>
-        <div className="divide-y divide-border">
-          {recentProjets.length === 0 ? (
-            <div className="px-6 py-12 text-center">
-              <p className="text-muted">Aucun projet pour le moment</p>
-              <Link
-                href="/admin/projets/nouveau"
-                className="mt-4 inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                Creer un projet
-              </Link>
+      {/* Projets en cours et récents */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Projets en cours */}
+        <div className="rounded-xl border border-border bg-white">
+          <div className="flex items-center justify-between border-b border-border px-6 py-5">
+            <div>
+              <h2 className="text-lg font-bold text-foreground">En cours</h2>
+              <p className="text-xs text-muted mt-1">Projets actifs cette semaine</p>
             </div>
-          ) : (
-            recentProjets.map((projet) => (
-              <div key={projet.id} className="flex items-center justify-between px-6 py-4">
-                <div>
-                  <p className="font-medium text-foreground">{projet.nom}</p>
-                  <p className="text-sm text-muted">
-                    {projet.clients?.nom || "Client inconnu"}
-                  </p>
-                </div>
-                <span className={`rounded-full px-3 py-1 text-xs font-medium ${statusColors[projet.statut] || "bg-gray-100 text-gray-800"}`}>
-                  {statusLabels[projet.statut] || projet.statut}
-                </span>
+            <Link
+              href="/admin/projets?filter=en_cours"
+              className="text-sm font-semibold text-primary hover:underline"
+            >
+              Voir tous
+            </Link>
+          </div>
+          <div className="divide-y divide-border">
+            {recentProjets.filter(p => p.statut === 'en_cours').length === 0 ? (
+              <div className="px-6 py-8 text-center text-sm text-muted">
+                Aucun projet en cours
               </div>
-            ))
-          )}
+            ) : (
+              recentProjets.filter(p => p.statut === 'en_cours').slice(0, 3).map((projet) => (
+                <Link
+                  key={projet.id}
+                  href={`/admin/projets/${projet.id}`}
+                  className="flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition-colors group"
+                >
+                  <div className="flex-1">
+                    <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {projet.nom}
+                    </p>
+                    <p className="text-xs text-muted mt-1">
+                      {projet.clients?.nom || "Sans client"}
+                    </p>
+                  </div>
+                  <svg className="h-4 w-4 text-muted group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Projets récents */}
+        <div className="rounded-xl border border-border bg-white">
+          <div className="flex items-center justify-between border-b border-border px-6 py-5">
+            <div>
+              <h2 className="text-lg font-bold text-foreground">Récents</h2>
+              <p className="text-xs text-muted mt-1">Derniers projets créés</p>
+            </div>
+            <Link
+              href="/admin/projets"
+              className="text-sm font-semibold text-primary hover:underline"
+            >
+              Voir tous
+            </Link>
+          </div>
+          <div className="divide-y divide-border">
+            {recentProjets.length === 0 ? (
+              <div className="px-6 py-8 text-center text-sm text-muted">
+                Aucun projet pour le moment
+              </div>
+            ) : (
+              recentProjets.slice(0, 3).map((projet) => (
+                <Link
+                  key={projet.id}
+                  href={`/admin/projets/${projet.id}`}
+                  className="flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition-colors group"
+                >
+                  <div className="flex-1">
+                    <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {projet.nom}
+                    </p>
+                    <p className="text-xs text-muted mt-1">
+                      {projet.clients?.nom || "Sans client"}
+                    </p>
+                  </div>
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${statusColors[projet.statut] || "bg-gray-100 text-gray-800"}`}>
+                    {statusLabels[projet.statut] || projet.statut}
+                  </span>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Actions rapides */}
+      <div className="rounded-xl border border-border bg-gradient-to-br from-primary/5 to-primary/0 p-6">
+        <h3 className="text-lg font-bold text-foreground mb-4">Actions rapides</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <Link
+            href="/admin/clients/nouveau"
+            className="flex items-center gap-2 p-3 rounded-lg bg-white border border-border hover:border-primary/50 hover:shadow-md transition-all text-sm font-medium text-foreground"
+          >
+            <span>👤</span> Nouveau client
+          </Link>
+          <Link
+            href="/admin/projets/nouveau"
+            className="flex items-center gap-2 p-3 rounded-lg bg-white border border-border hover:border-primary/50 hover:shadow-md transition-all text-sm font-medium text-foreground"
+          >
+            <span>📁</span> Nouveau projet
+          </Link>
+          <Link
+            href="/admin/experts"
+            className="flex items-center gap-2 p-3 rounded-lg bg-white border border-border hover:border-primary/50 hover:shadow-md transition-all text-sm font-medium text-foreground"
+          >
+            <span>👨‍💼</span> Gérer experts
+          </Link>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 p-3 rounded-lg bg-white border border-border hover:border-primary/50 hover:shadow-md transition-all text-sm font-medium text-foreground"
+          >
+            <span>👁️</span> Voir site
+          </a>
         </div>
       </div>
     </div>

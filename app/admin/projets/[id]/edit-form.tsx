@@ -59,22 +59,49 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
 
   return (
     <div>
-      <div className="mb-8">
-        <Link
-          href="/admin/projets"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-          </svg>
-          Retour aux projets
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-foreground">Modifier le projet</h1>
-        <p className="mt-1 text-sm text-muted">Modifiez les informations du projet</p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <Link
+            href="/admin/projets"
+            className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors mb-4"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            Retour aux projets
+          </Link>
+          <h1 className="text-3xl font-bold text-foreground">{nom}</h1>
+          <p className="mt-2 text-sm text-muted">Gérez les détails du projet et partagez avec le client</p>
+        </div>
+        <div className="flex gap-3">
+          <a
+            href={`/preview/${projet.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary/10 text-primary px-4 py-2 text-sm font-semibold hover:bg-primary/20 transition-colors"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            Aperçu
+          </a>
+          <a
+            href={`https://wa.me/22955530826?text=Bonjour, je demande un suivi sur le projet: ${nom}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-green-100 text-green-700 px-4 py-2 text-sm font-semibold hover:bg-green-200 transition-colors"
+          >
+            💬 Contacter client
+          </a>
+        </div>
       </div>
 
-      <div className="max-w-2xl rounded-xl border border-border bg-card p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <div className="rounded-xl border border-border bg-white p-8 shadow-sm">
+            <h2 className="text-xl font-bold text-foreground mb-6">Informations du projet</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="nom" className="block text-sm font-medium text-foreground">
               Nom du projet *
@@ -199,7 +226,7 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
               {error}
             </div>
           )}
-          <div className="flex items-center justify-end gap-4">
+          <div className="flex items-center justify-end gap-4 pt-4 border-t border-border">
             <Link
               href="/admin/projets"
               className="rounded-lg px-4 py-2.5 text-sm font-medium text-muted hover:text-foreground transition-colors"
@@ -209,12 +236,108 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
             <button
               type="submit"
               disabled={isLoading}
-              className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
-              {isLoading ? "Enregistrement..." : "Enregistrer"}
+              {isLoading ? "Enregistrement..." : "Enregistrer les modifications"}
             </button>
           </div>
-        </form>
+            </form>
+          </div>
+        </div>
+
+        {/* Sidebar collaboration */}
+        <div className="space-y-6">
+          {/* Statut rapide */}
+          <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-4">État du projet</h3>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs font-semibold text-muted uppercase mb-2">Statut actuel</p>
+                <div className={`inline-block px-3 py-2 rounded-lg text-sm font-semibold ${
+                  statut === 'termine' ? 'bg-green-100 text-green-800' :
+                  statut === 'en_cours' ? 'bg-blue-100 text-blue-800' :
+                  statut === 'en_attente' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-red-100 text-red-800'
+                }`}>
+                  {statut === 'termine' ? '✓ Terminé' :
+                   statut === 'en_cours' ? '⏳ En cours' :
+                   statut === 'en_attente' ? '⏱️ En attente' :
+                   '✕ Annulé'}
+                </div>
+              </div>
+
+              {dateDebut && (
+                <div>
+                  <p className="text-xs font-semibold text-muted uppercase mb-1">Commencé le</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {new Date(dateDebut).toLocaleDateString('fr-FR', { dateStyle: 'long' })}
+                  </p>
+                </div>
+              )}
+
+              {dateFin && (
+                <div>
+                  <p className="text-xs font-semibold text-muted uppercase mb-1">Fin prévue</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {new Date(dateFin).toLocaleDateString('fr-FR', { dateStyle: 'long' })}
+                  </p>
+                </div>
+              )}
+
+              {prix && (
+                <div>
+                  <p className="text-xs font-semibold text-muted uppercase mb-1">Budget</p>
+                  <p className="text-2xl font-bold text-primary">{parseInt(prix).toLocaleString()} FCFA</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-4">Actions</h3>
+            <div className="space-y-2">
+              <a
+                href={`/admin/projets/${projet.id}/fichiers`}
+                className="flex items-center gap-2 w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-sm font-medium text-foreground transition-colors"
+              >
+                <span>📁</span> Gérer les fichiers
+              </a>
+              <a
+                href={`/preview/${projet.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-sm font-medium text-foreground transition-colors"
+              >
+                <span>👁️</span> Voir l'aperçu
+              </a>
+              <button
+                onClick={() => {
+                  const url = `${window.location.origin}/preview/${projet.id}`
+                  navigator.clipboard.writeText(url)
+                  alert('Lien copié!')
+                }}
+                className="flex items-center gap-2 w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-sm font-medium text-foreground transition-colors"
+              >
+                <span>🔗</span> Copier lien client
+              </button>
+            </div>
+          </div>
+
+          {/* Collaboration */}
+          <div className="rounded-xl border border-border bg-gradient-to-br from-primary/5 to-primary/0 p-6">
+            <h3 className="text-lg font-bold text-foreground mb-4">💬 Collaboration</h3>
+            <p className="text-sm text-muted mb-4">
+              Contactez le client via WhatsApp pour des mises à jour rapides et des feedbacks.
+            </p>
+            <a
+              href={`https://wa.me/22955530826?text=Bonjour, suivi du projet: ${nom}`}
+              className="block w-full text-center bg-primary text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-primary/90 transition-all text-sm"
+            >
+              Contacter le client
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   )
