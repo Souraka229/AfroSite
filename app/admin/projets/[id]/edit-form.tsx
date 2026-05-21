@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { WhatsappPitchButton } from "@/components/whatsapp-pitch-button"
 import { ShareProjectButton } from "@/components/share-project-button"
+import { ProjectPreviewButton } from "@/components/project-preview-button"
 
 interface EditProjetFormProps {
   projet: Projet
@@ -301,6 +302,16 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
             <ShareProjectButton projectId={projet.id} projectName={nom} />
           </div>
 
+          {/* Preview */}
+          <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-4">👁️ Prévisualisation</h3>
+            <ProjectPreviewButton
+              projectId={projet.id}
+              projectName={nom}
+              projectDescription={description}
+            />
+          </div>
+
           {/* Actions */}
           <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
             <h3 className="text-lg font-bold text-foreground mb-4">Actions</h3>
@@ -312,12 +323,10 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
                 <span>📁</span> Gérer les fichiers
               </a>
               <a
-                href={`/preview/${projet.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/api/share-project`}
                 className="flex items-center gap-2 w-full p-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-sm font-medium text-foreground transition-colors"
               >
-                <span>👁️</span> Voir l'aperçu
+                <span>🔗</span> Générer lien partage
               </a>
             </div>
           </div>

@@ -1,9 +1,18 @@
 import { createClient } from "@/lib/supabase/server"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { EditExpertForm } from "./edit-form"
 
 async function getExpertData(id: string) {
   const supabase = await createClient()
+
+  // Vérifier l'authentification
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/auth/login')
+  }
 
   const [expertRes, projectsRes] = await Promise.all([
     supabase.from("experts").select("*").eq("id", id).single(),
@@ -14,9 +23,25 @@ async function getExpertData(id: string) {
       .order("created_at", { ascending: false }),
   ])
 
+  const expert = expertRes.data
+
+  if (!expert) {
+    notFound()
+  }
+
+  // Vérifier que l'utilisateur est autorisé à éditer ce profil
+  // Un expert ne peut éditer que SON profil
+  const isOwner = user.email === expert.email
+  const isAdmin = user.email === 'admin@afrosite.com' // À configurer
+
+  if (!isOwner && !isAdmin) {
+    redirect('/admin/team?error=unauthorized')
+  }
+
   return {
-    expert: expertRes.data,
+    expert,
     projects: projectsRes.data || [],
+    canEdit: isOwner || isAdmin,
   }
 }
 
@@ -26,9 +51,9 @@ export default async function ExpertProfilePage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const { expert, projects } = await getExpertData(id)
+  const { expert, projects, canEdit } = await getExpertData(id)
 
-  if (!expert) {
+  if (!expert || !canEdit) {
     notFound()
   }
 
