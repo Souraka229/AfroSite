@@ -5,6 +5,7 @@ import { Client, Expert, Projet } from "@/lib/types"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { WhatsappPitchButton } from "@/components/whatsapp-pitch-button"
 
 interface EditProjetFormProps {
   projet: Projet
@@ -324,11 +325,25 @@ export function EditProjetForm({ projet, clients, experts }: EditProjetFormProps
             </div>
           </div>
 
+          {/* IA Pitch */}
+          <div className="rounded-xl border border-border bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-6">
+            <h3 className="text-lg font-bold text-foreground mb-2">🤖 Message IA</h3>
+            <p className="text-xs text-muted mb-4">
+              L'IA génère un message de pitch personnalisé pour annoncer le site au client.
+            </p>
+            <WhatsappPitchButton
+              projectName={nom}
+              projectDescription={description}
+              projectCategory={clientId}
+              clientName={clients.find(c => c.id === clientId)?.nom || "Client"}
+            />
+          </div>
+
           {/* Collaboration */}
           <div className="rounded-xl border border-border bg-gradient-to-br from-primary/5 to-primary/0 p-6">
-            <h3 className="text-lg font-bold text-foreground mb-4">💬 Collaboration</h3>
+            <h3 className="text-lg font-bold text-foreground mb-4">💬 Contact Direct</h3>
             <p className="text-sm text-muted mb-4">
-              Contactez le client via WhatsApp pour des mises à jour rapides et des feedbacks.
+              Contactez le client rapidement sur WhatsApp.
             </p>
             <a
               href={`https://wa.me/22955530826?text=Bonjour, suivi du projet: ${nom}`}
