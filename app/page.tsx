@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { HeroSection } from "@/components/hero-section"
+import { ClientsSection } from "@/components/clients-section"
 import { ServicesSection } from "@/components/services-section"
 import { PortfolioSection } from "@/components/portfolio-section"
 import { PricingSection } from "@/components/pricing-section"
@@ -54,6 +55,7 @@ export default async function HomePage() {
       <Header />
       <main className="flex-1">
         <HeroSection />
+        <ClientsSection clients={projects} />
         <ServicesSection />
         <PortfolioSection projects={projects} />
         <PricingSection />
