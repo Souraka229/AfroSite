@@ -1,59 +1,64 @@
-export function WhyUsSection() {
-  const reasons = [
-    {
-      title: "Paiement après validation",
-      description: "Zéro avance, zéro risque. Vous payez seulement quand vous êtes satisfait. C'est VOUS qui décidez."
-    },
-    {
-      title: "Révisions illimitées",
-      description: "Pas satisfait? On modifie jusqu'à ce que ce soit parfait. Pas de limite de révisions."
-    },
-    {
-      title: "Livraison rapide",
-      description: "2 à 4 semaines. Nous sommes rapides, efficaces et nous respectons les délais."
-    },
-    {
-      title: "Équipe expérimentée",
-      description: "Nos experts comprennent votre métier. Nous créons des sites qui convertissent."
-    },
-    {
-      title: "Support inclus",
-      description: "Après livraison, vous avez du support gratuit. Au-delà, maintenance très abordable."
-    },
-    {
-      title: "Tous les types de sites",
-      description: "Restaurants, traders, boutiques, applications custom — aucune limitation. Si tu peux le rêver, nous le créons."
-    }
-  ]
+const reasons = [
+  {
+    title: "Paiement après validation",
+    description: "Zéro avance, zéro risque. Vous payez seulement quand le résultat vous satisfait. C'est vous qui décidez.",
+  },
+  {
+    title: "Révisions illimitées",
+    description: "Pas satisfait d'un détail ? On modifie sans limite jusqu'à ce que ce soit parfait.",
+  },
+  {
+    title: "Livraison en 2-4 semaines",
+    description: "Rapides, efficaces et respectueux des délais. Votre site en ligne sans attente interminable.",
+  },
+  {
+    title: "Équipe expérimentée",
+    description: "Nos experts comprennent votre secteur. Nous créons des sites pensés pour convertir.",
+  },
+  {
+    title: "Support post-livraison",
+    description: "Support gratuit inclus les premiers mois. Maintenance mensuelle très abordable au-delà.",
+  },
+  {
+    title: "Aucune limite de projet",
+    description: "Restaurants, e-commerce, SaaS, ONG, portfolios — tout type de site, toute complexité.",
+  },
+]
 
+export function WhyUsSection() {
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-[#070f1e]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
-            POURQUOI NOUS
+          <span className="inline-block px-3 py-1 rounded-full border border-primary/30 text-primary text-xs font-semibold uppercase tracking-widest mb-5">
+            Pourquoi nous
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl text-balance">
-            Partenaires de votre succès
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Votre partenaire de confiance
           </h2>
-          <p className="mt-6 text-lg text-muted text-pretty max-w-xl mx-auto">
-            Nous ne sommes pas juste des développeurs, nous comprenons votre métier et créons des sites qui convertissent.
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
+            Nous ne sommes pas de simples développeurs — nous sommes investis dans le succès de votre activité.
           </p>
         </div>
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason, index) => (
             <div
               key={reason.title}
-              className="group relative flex flex-col rounded-xl border border-border bg-white p-8 hover:border-primary/50 hover:shadow-lg transition-all hover:scale-105"
+              className="group relative flex flex-col rounded-xl border border-white/7 bg-[#0c1628] p-7 hover:border-primary/30 hover:bg-[#0d1a30] transition-all duration-300"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-white font-bold text-xl">
-                {index + 1}
+              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 text-primary text-sm font-bold">
+                {String(index + 1).padStart(2, "0")}
               </div>
-              <h3 className="mt-6 text-lg font-semibold text-foreground">{reason.title}</h3>
-              <p className="mt-3 text-sm text-muted leading-relaxed flex-1">{reason.description}</p>
+              <h3 className="text-base font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                {reason.title}
+              </h3>
+              <p className="text-sm text-muted leading-relaxed flex-1">{reason.description}</p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )

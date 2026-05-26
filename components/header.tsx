@@ -2,37 +2,45 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#060d1a]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-bold text-foreground tracking-tight">AfroSite</span>
+        <Link href="/" className="flex items-center gap-1">
+          <span className="text-base font-bold tracking-tight text-foreground">Afro</span>
+          <span className="text-base font-bold tracking-tight text-primary">Site</span>
         </Link>
+
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#services" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-wider">
+          <Link href="#services" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-widest">
             Services
           </Link>
-          <Link href="#experts" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-wider">
-            Nos Experts
+          <Link href="#pricing" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-widest">
+            Tarifs
           </Link>
-          <Link href="#contact" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-wider">
+          <Link href="#experts" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-widest">
+            Equipe
+          </Link>
+          <Link href="#contact" className="text-xs font-medium text-muted hover:text-foreground transition-colors uppercase tracking-widest">
             Contact
           </Link>
         </nav>
+
         <div className="flex items-center gap-3">
           <a
             href="https://wa.me/22955530826"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center text-xs font-medium text-muted hover:text-foreground transition-colors"
+            className="hidden sm:inline text-xs font-medium text-muted hover:text-foreground transition-colors"
           >
-            WhatsApp
+            +229 55 53 08 26
           </a>
-          <Link
-            href="/auth/login"
-            className="inline-flex items-center justify-center rounded px-3 py-2 text-xs font-medium bg-foreground text-white hover:bg-black transition-colors"
+          <a
+            href="https://wa.me/22955530826?text=Bonjour%2C%20j%27aimerais%20discuter%20de%20mon%20projet%20web"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
           >
-            Admin
-          </Link>
+            Démarrer
+          </a>
         </div>
       </div>
     </header>

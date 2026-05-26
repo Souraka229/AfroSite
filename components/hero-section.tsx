@@ -2,139 +2,116 @@ import Link from "next/link"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden pt-20 pb-20">
-      {/* Premium animated background */}
-      <div className="absolute inset-0">
-        {/* Grid background */}
-        <div className="absolute inset-0 opacity-50" style={{backgroundImage: "url('data:image/svg+xml;utf8,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.03%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"}}></div>
-
-        {/* Animated orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+    <section className="relative min-h-screen bg-[#060d1a] overflow-hidden flex items-center">
+      {/* Background layers */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Dot grid */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        {/* Glow orbs */}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute -bottom-40 left-1/3 w-[400px] h-[400px] rounded-full bg-primary/8 blur-[100px]" />
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#060d1a] to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
-        <div className="mx-auto max-w-5xl text-center">
-          {/* Premium badge */}
-          <div className="mb-12 flex justify-center">
-            <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-1000"></div>
-              <span className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black border border-primary/50 text-primary text-sm font-bold">
-                <span className="inline-block w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                🏆 Agence Web Premium au Bénin
-              </span>
-            </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 w-full">
+        <div className="mx-auto max-w-4xl text-center">
+
+          {/* Badge */}
+          <div className="mb-10 flex justify-center">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold tracking-wider uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Agence Web — Bénin
+            </span>
           </div>
 
-          {/* Main heading with gradient */}
-          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-white leading-tight mb-8">
-            Votre Site Web
+          {/* Main headline */}
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight text-white leading-[0.95] mb-8">
+            Votre site web
             <br />
-            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-primary text-6xl sm:text-7xl lg:text-8xl">
-              Sans Risque
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-300 to-blue-400">
+              livré en 2-4 sem.
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-12 font-light">
-            <span className="text-white font-semibold">Zéro avance.</span> Vous ne payez que quand c'est parfait.
-            <br />
-            <span className="text-primary font-semibold">Sites modernes qui convertissent</span> et génèrent des ventes.
+          <p className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-14 leading-relaxed">
+            Vous ne payez qu&apos;après validation complète.{" "}
+            <span className="text-foreground font-medium">Zéro avance. Révisions illimitées.</span>{" "}
+            Des sites modernes qui génèrent des clients.
           </p>
 
-          {/* Trust metrics */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-16 px-4">
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-black text-primary mb-2">50+</div>
-              <p className="text-xs sm:text-sm text-gray-400 group-hover:text-white transition">Clients satisfaits</p>
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-10 sm:gap-16 mb-14">
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-black text-primary">50+</div>
+              <p className="text-xs text-muted mt-1 uppercase tracking-wider">Projets livrés</p>
             </div>
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-black text-primary mb-2">100%</div>
-              <p className="text-xs sm:text-sm text-gray-400 group-hover:text-white transition">Taux de satisfaction</p>
+            <div className="w-px h-10 bg-white/10" />
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-black text-primary">100%</div>
+              <p className="text-xs text-muted mt-1 uppercase tracking-wider">Satisfaction</p>
             </div>
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-black text-primary mb-2">24/7</div>
-              <p className="text-xs sm:text-sm text-gray-400 group-hover:text-white transition">Support réactif</p>
+            <div className="w-px h-10 bg-white/10" />
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-black text-primary">0 FCFA</div>
+              <p className="text-xs text-muted mt-1 uppercase tracking-wider">Avant validation</p>
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://wa.me/22955530826?text=Bonjour,%20j'aimerais%20discuter%20de%20mon%20projet%20web"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-full sm:w-auto"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-base hover:bg-primary/90 transition-all hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] active:scale-95"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-600 rounded-xl opacity-75 group-hover:opacity-100 blur transition duration-300"></div>
-              <div className="relative px-12 py-4 bg-black rounded-xl flex items-center justify-center gap-3">
-                <span className="text-xl">💬</span>
-                <span className="text-white font-bold">Démarrer Maintenant</span>
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
+              Démarrer mon projet
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
             </a>
-
             <Link
               href="#pricing"
-              className="w-full sm:w-auto px-12 py-4 border-2 border-primary text-white font-bold rounded-xl hover:bg-primary/10 transition-all duration-300 text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-white/15 text-foreground font-semibold text-base hover:border-primary/50 hover:bg-white/5 transition-all"
             >
-              Voir les Tarifs
+              Voir les tarifs
             </Link>
           </div>
 
-          {/* Features preview */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-sm">
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition">
-              <span className="text-2xl">✅</span>
-              <p className="text-gray-400 mt-2">Pas d'avance</p>
-            </div>
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition">
-              <span className="text-2xl">♾️</span>
-              <p className="text-gray-400 mt-2">Révisions</p>
-            </div>
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition">
-              <span className="text-2xl">⚡</span>
-              <p className="text-gray-400 mt-2">Rapide</p>
-            </div>
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition">
-              <span className="text-2xl">🔒</span>
-              <p className="text-gray-400 mt-2">Sécurisé</p>
-            </div>
+          {/* Feature pills */}
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
+            {["Sans avance", "Révisions illimitées", "Livraison rapide", "Support inclus"].map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/8 text-xs text-muted"
+              >
+                <svg className="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 z-10 animate-pulse">
-        <span className="text-gray-500 text-sm">Explorez nos services</span>
-        <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
+        <span className="text-xs text-muted/60 uppercase tracking-widest">Découvrir</span>
+        <svg className="w-4 h-4 text-muted/40 animate-bounce" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
         </svg>
       </div>
-
-      <style>{`
-        @keyframes blob {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </section>
   )
 }

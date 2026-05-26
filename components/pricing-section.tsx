@@ -1,117 +1,134 @@
-export function PricingSection() {
-  const pricing = [
-    {
-      name: "Site Vitrine",
-      price: "100 000",
-      originalPrice: "150 000",
-      description: "Parfait pour démarrer",
-      features: [
-        "4-5 pages",
-        "Responsive Design",
-        "Contact Form",
-        "Google Maps intégré",
-        "SEO Basique",
-        "1 mois de support gratuit",
-        "0 FCFA avant validation"
-      ]
-    },
-    {
-      name: "Restaurant / Boutique",
-      price: "180 000",
-      originalPrice: "250 000",
-      description: "Notre bestseller",
-      features: [
-        "Menu en ligne dynamique",
-        "Système de réservation",
-        "Galerie photos",
-        "Blog intégré",
-        "Panier & commandes",
-        "3 mois de support gratuit",
-        "Mise à jour SEO incluse",
-        "0 FCFA avant validation"
-      ],
-      highlight: true
-    },
-    {
-      name: "E-Commerce",
-      price: "350 000",
-      originalPrice: "500 000",
-      description: "Pour vendre en ligne",
-      features: [
-        "Produits illimités",
-        "Paiement sécurisé",
-        "Gestion stocks",
-        "Emails automats",
-        "Analytics avancé",
-        "6 mois de support gratuit",
-        "Intégration paiement",
-        "0 FCFA avant validation"
-      ]
-    },
-    {
-      name: "Sur Mesure",
-      price: "À partir de 500K",
-      description: "Vos besoins spécifiques",
-      features: [
-        "Toutes les fonctionnalités",
-        "Infrastructure complète",
-        "API personnalisée",
-        "Intégration tiers",
-        "Support prioritaire",
-        "1 an de maintenance",
-        "Audit SEO complet",
-        "0 FCFA avant validation"
-      ]
-    }
-  ]
+const plans = [
+  {
+    name: "Site Vitrine",
+    price: "100 000",
+    originalPrice: "150 000",
+    description: "Parfait pour démarrer en ligne",
+    features: [
+      "4 à 5 pages",
+      "Design responsive",
+      "Formulaire de contact",
+      "Google Maps intégré",
+      "SEO de base",
+      "1 mois de support gratuit",
+      "0 FCFA avant validation",
+    ],
+  },
+  {
+    name: "Restaurant / Boutique",
+    price: "180 000",
+    originalPrice: "250 000",
+    description: "Notre offre la plus populaire",
+    features: [
+      "Menu en ligne dynamique",
+      "Système de réservation",
+      "Galerie photos",
+      "Blog intégré",
+      "Panier & commandes",
+      "3 mois de support gratuit",
+      "Mise à jour SEO incluse",
+      "0 FCFA avant validation",
+    ],
+    highlight: true,
+  },
+  {
+    name: "E-Commerce",
+    price: "350 000",
+    originalPrice: "500 000",
+    description: "Pour vendre en ligne",
+    features: [
+      "Produits illimités",
+      "Paiement sécurisé",
+      "Gestion des stocks",
+      "Emails automatiques",
+      "Analytics avancé",
+      "6 mois de support gratuit",
+      "Intégration paiement mobile",
+      "0 FCFA avant validation",
+    ],
+  },
+  {
+    name: "Sur Mesure",
+    price: "Sur devis",
+    description: "Pour vos besoins spécifiques",
+    features: [
+      "Toutes les fonctionnalités",
+      "Infrastructure complète",
+      "API personnalisée",
+      "Intégrations tierces",
+      "Support prioritaire",
+      "1 an de maintenance",
+      "Audit SEO complet",
+      "0 FCFA avant validation",
+    ],
+  },
+]
 
+export function PricingSection() {
   return (
-    <section id="pricing" className="py-32 bg-gradient-to-br from-slate-50 to-white">
+    <section id="pricing" className="py-32 bg-[#060d1a]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
-            TARIFS
+          <span className="inline-block px-3 py-1 rounded-full border border-primary/30 text-primary text-xs font-semibold uppercase tracking-widest mb-5">
+            Tarifs
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl text-balance">
-            Tarifs Transparents & Équitables
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Tarifs transparents
           </h2>
-          <p className="mt-6 text-lg text-muted text-pretty max-w-xl mx-auto">
-            Paiement APRÈS validation de votre site. Zéro risque. Zéro frais cachés. Révisions illimitées.
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto leading-relaxed">
+            Paiement après validation. Zéro risque. Zéro frais cachés.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {pricing.map((plan) => (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative flex flex-col rounded-xl border-2 p-8 transition-all ${
+              className={`relative flex flex-col rounded-xl p-7 transition-all ${
                 plan.highlight
-                  ? "border-primary bg-gradient-to-br from-primary/5 to-white shadow-xl scale-105"
-                  : "border-border bg-white hover:border-primary/50 hover:shadow-lg"
+                  ? "border border-primary/40 bg-[#0c1628] shadow-[0_0_40px_rgba(34,211,238,0.08)]"
+                  : "border border-white/7 bg-[#0c1628] hover:border-white/15"
               }`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-6 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
-                  ⭐ POPULAIRE
+                <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+              )}
+
+              {plan.highlight && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold tracking-wider uppercase">
+                    Populaire
+                  </span>
                 </div>
               )}
 
-              <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
-              <p className="mt-2 text-sm text-muted">{plan.description}</p>
+              <div className="mb-6">
+                <h3 className="text-base font-bold text-foreground">{plan.name}</h3>
+                <p className="mt-1 text-xs text-muted">{plan.description}</p>
+              </div>
 
-              <div className="mt-8 flex items-baseline gap-2">
-                <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                <span className="text-sm text-muted">FCFA</span>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-3xl font-black ${plan.highlight ? "text-primary" : "text-foreground"}`}>
+                    {plan.price}
+                  </span>
+                  {plan.originalPrice && (
+                    <span className="text-xs text-muted ml-1">FCFA</span>
+                  )}
+                </div>
                 {plan.originalPrice && (
-                  <span className="text-sm text-muted line-through ml-2">{plan.originalPrice}</span>
+                  <span className="text-xs text-muted/60 line-through">{plan.originalPrice} FCFA</span>
                 )}
               </div>
 
-              <ul className="mt-8 space-y-4 flex-1">
+              <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm">
-                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-                    <span className="text-foreground">{feature}</span>
+                  <li key={feature} className="flex items-start gap-2.5 text-sm">
+                    <svg className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-muted">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -120,30 +137,33 @@ export function PricingSection() {
                 href="https://wa.me/22955530826"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-8 w-full rounded-lg py-3 text-center font-semibold transition-all ${
+                className={`w-full rounded-lg py-3 text-center text-sm font-semibold transition-all ${
                   plan.highlight
-                    ? "bg-primary text-white hover:bg-primary/90 shadow-lg"
-                    : "bg-foreground text-white hover:bg-foreground/90"
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+                    : "border border-white/15 text-foreground hover:border-white/30 hover:bg-white/5"
                 }`}
               >
-                Commencer Maintenant
+                Commencer
               </a>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 rounded-xl bg-white border-2 border-primary/20 p-8 text-center">
-          <h3 className="text-xl font-bold text-foreground">💡 Vous avez une question ?</h3>
-          <p className="mt-3 text-muted">Contactez-nous directement sur WhatsApp pour discuter de votre projet.</p>
-          <a
-            href="https://wa.me/22955530826"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-all"
-          >
-            Parler avec un Expert
-          </a>
+        <div className="mt-12 rounded-xl border border-white/7 bg-[#0c1628] p-8 text-center">
+          <p className="text-sm text-muted">
+            Une question sur les tarifs ?{" "}
+            <a
+              href="https://wa.me/22955530826"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-semibold hover:text-primary/80 transition-colors"
+            >
+              Contactez-nous sur WhatsApp
+            </a>{" "}
+            — réponse en moins d&apos;une heure.
+          </p>
         </div>
+
       </div>
     </section>
   )
