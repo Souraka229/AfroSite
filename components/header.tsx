@@ -2,11 +2,10 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#060d1a]/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-1">
-          <span className="text-base font-bold tracking-tight text-foreground">Afro</span>
-          <span className="text-base font-bold tracking-tight text-primary">Site</span>
+          <span className="text-base font-bold text-foreground">AfroSite</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -37,7 +36,7 @@ export function Header() {
             href="https://wa.me/22955530826?text=Bonjour%2C%20j%27aimerais%20discuter%20de%20mon%20projet%20web"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold bg-foreground text-white hover:bg-foreground/90 transition-colors"
           >
             Démarrer
           </a>

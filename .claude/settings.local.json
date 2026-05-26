@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.awwwards.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:magicui.design)",
+      "WebFetch(domain:blog.olivierlarose.com)",
+      "WebFetch(domain:jb.desishub.com)",
+      "WebFetch(domain:ui.aceternity.com)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:colorhero.io)",
+      "WebFetch(domain:www.shadcnblocks.com)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(vercel --version)",
+      "Bash(vercel deploy *)",
+      "Bash(curl -X POST https://qopdjxnktryuhclbwdej.supabase.co/rest/v1/projets -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcGRqeG5rdHJ5dWhjbGJ3ZGVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyOTUyMTAsImV4cCI6MjA5NDg3MTIxMH0.c_3HYzoWnAOoZC2zxPPckG1USBGqyo37GHDZkiG7RK8' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcGRqeG5rdHJ5dWhjbGJ3ZGVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyOTUyMTAsImV4cCI6MjA5NDg3MTIxMH0.c_3HYzoWnAOoZC2zxPPckG1USBGqyo37GHDZkiG7RK8' -d '[ *)",
+      "Bash(git reset *)",
+      "Bash(vercel status *)",
+      "Bash(vercel logs *)",
+      "Bash(pkill -f \"vercel logs\")",
+      "Bash(vercel inspect *)",
+      "Bash(curl -s https://afro-site.vercel.app/)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
