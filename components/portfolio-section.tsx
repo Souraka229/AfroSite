@@ -25,22 +25,24 @@ export function PortfolioSection({ projects }: PortfolioSectionProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             Portfolio
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Nos réalisations
           </h2>
-          <p className="mt-5 text-lg text-muted max-w-xl mx-auto">
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto" data-animate data-delay="2">
             Des sites livrés pour des entreprises, restaurants et services au Bénin.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((project) => (
+          {featured.map((project, index) => (
             <div
               key={project.id}
-              className="group overflow-hidden rounded-xl border border-border bg-white hover:border-foreground/20 hover:shadow-lg transition-all duration-200"
+              data-animate="scale"
+              data-delay={String((index % 3) + 1)}
+              className="group overflow-hidden rounded-xl border border-border bg-white hover:border-foreground/20 hover:shadow-lg transition-all duration-300"
             >
               <div className="relative h-48 w-full overflow-hidden bg-[#f8fafc]">
                 {project.image_url ? (
@@ -48,7 +50,7 @@ export function PortfolioSection({ projects }: PortfolioSectionProps) {
                     src={project.image_url}
                     alt={project.nom}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
@@ -67,7 +69,7 @@ export function PortfolioSection({ projects }: PortfolioSectionProps) {
               </div>
 
               <div className="p-5">
-                <h3 className="text-sm font-bold text-foreground mb-1.5">{project.nom}</h3>
+                <h3 className="text-sm font-bold text-foreground mb-1.5 group-hover:text-accent transition-colors">{project.nom}</h3>
                 <p className="text-sm text-muted leading-relaxed line-clamp-2">{project.description}</p>
                 {project.url_site && (
                   <a

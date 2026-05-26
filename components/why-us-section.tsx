@@ -31,13 +31,13 @@ export function WhyUsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             Pourquoi nous
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Votre partenaire de confiance
           </h2>
-          <p className="mt-5 text-lg text-muted max-w-xl mx-auto">
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto" data-animate data-delay="2">
             Nous ne sommes pas de simples développeurs — nous sommes investis dans votre succès.
           </p>
         </div>
@@ -46,13 +46,15 @@ export function WhyUsSection() {
           {reasons.map((reason, index) => (
             <div
               key={reason.title}
+              data-animate
+              data-delay={String((index % 3) + 1)}
               className="group flex gap-5 rounded-xl border border-border bg-white p-6 hover:border-foreground/20 hover:shadow-sm transition-all"
             >
               <div className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-foreground/5 text-foreground text-xs font-bold">
                 {String(index + 1).padStart(2, "0")}
               </div>
               <div>
-                <h3 className="text-sm font-bold text-foreground mb-1.5">{reason.title}</h3>
+                <h3 className="text-sm font-bold text-foreground mb-1.5 group-hover:text-accent transition-colors">{reason.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{reason.description}</p>
               </div>
             </div>

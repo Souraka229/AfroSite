@@ -70,21 +70,23 @@ export function PricingSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             Tarifs
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Tarifs transparents
           </h2>
-          <p className="mt-5 text-lg text-muted max-w-xl mx-auto">
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto" data-animate data-delay="2">
             Paiement après validation. Zéro risque. Zéro frais cachés.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {plans.map((plan) => (
+          {plans.map((plan, index) => (
             <div
               key={plan.name}
+              data-animate="scale"
+              data-delay={String(index + 1)}
               className={`relative flex flex-col rounded-xl p-6 transition-all ${
                 plan.highlight
                   ? "border-2 border-foreground bg-foreground text-white shadow-xl"
@@ -129,8 +131,7 @@ export function PricingSection() {
                   <li key={feature} className="flex items-start gap-2 text-xs">
                     <svg
                       className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-white/70" : "text-foreground/60"}`}
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
+                      fill="currentColor" viewBox="0 0 20 20"
                     >
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -155,15 +156,10 @@ export function PricingSection() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-xl border border-border bg-white p-6 text-center">
+        <div className="mt-10 rounded-xl border border-border bg-white p-6 text-center" data-animate>
           <p className="text-sm text-muted">
             Une question sur les tarifs ?{" "}
-            <a
-              href="https://wa.me/22955530826"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground font-semibold hover:underline"
-            >
+            <a href="https://wa.me/22955530826" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold hover:underline">
               Contactez-nous sur WhatsApp
             </a>{" "}
             — réponse en moins d&apos;une heure.

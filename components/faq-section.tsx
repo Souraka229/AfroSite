@@ -37,18 +37,18 @@ export function FAQSection() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
 
         <div className="text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             FAQ
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Questions fréquentes
           </h2>
-          <p className="mt-5 text-lg text-muted">
+          <p className="mt-5 text-lg text-muted" data-animate data-delay="2">
             Tout ce que vous devez savoir avant de démarrer.
           </p>
         </div>
 
-        <div className="divide-y divide-border border border-border rounded-xl overflow-hidden">
+        <div className="divide-y divide-border border border-border rounded-xl overflow-hidden" data-animate>
           {faqs.map((faq, index) => (
             <div key={index} className="bg-white">
               <button
@@ -57,17 +57,19 @@ export function FAQSection() {
               >
                 <span className="text-sm font-semibold text-foreground">{faq.question}</span>
                 <svg
-                  className={`w-4 h-4 text-muted flex-shrink-0 transition-transform duration-200 ${activeIndex === index ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 text-muted flex-shrink-0 transition-transform duration-300 ${activeIndex === index ? "rotate-180" : ""}`}
                   fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
-              {activeIndex === index && (
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeIndex === index ? "max-h-40" : "max-h-0"}`}
+              >
                 <div className="px-6 pb-5 bg-[#f8fafc] border-t border-border">
                   <p className="pt-4 text-sm text-muted leading-relaxed">{faq.answer}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

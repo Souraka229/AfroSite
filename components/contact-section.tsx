@@ -4,18 +4,18 @@ export function ContactSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             Contact
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Démarrons votre projet
           </h2>
-          <p className="mt-5 text-lg text-muted max-w-xl mx-auto">
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto" data-animate data-delay="2">
             Décrivez votre projet et recevez un devis personnalisé sous 24h.
           </p>
         </div>
 
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-lg" data-animate="scale" data-delay="3">
           <div className="rounded-2xl border border-border bg-white p-8 sm:p-10 shadow-sm">
             <form className="space-y-5">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -24,9 +24,7 @@ export function ContactSection() {
                     Nom
                   </label>
                   <input
-                    type="text"
-                    id="nom"
-                    name="nom"
+                    type="text" id="nom" name="nom"
                     className="block w-full rounded-lg border border-border bg-[#f8fafc] px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-foreground/40 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-colors"
                     placeholder="Votre nom"
                   />
@@ -36,9 +34,7 @@ export function ContactSection() {
                     Email
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type="email" id="email" name="email"
                     className="block w-full rounded-lg border border-border bg-[#f8fafc] px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-foreground/40 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-colors"
                     placeholder="vous@exemple.com"
                   />
@@ -50,9 +46,7 @@ export function ContactSection() {
                   Type de projet
                 </label>
                 <input
-                  type="text"
-                  id="sujet"
-                  name="sujet"
+                  type="text" id="sujet" name="sujet"
                   className="block w-full rounded-lg border border-border bg-[#f8fafc] px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-foreground/40 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-colors"
                   placeholder="Site vitrine, e-commerce, application..."
                 />
@@ -63,9 +57,7 @@ export function ContactSection() {
                   Message
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
+                  id="message" name="message" rows={4}
                   className="block w-full resize-none rounded-lg border border-border bg-[#f8fafc] px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-foreground/40 focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-colors"
                   placeholder="Décrivez votre projet, vos objectifs..."
                 />
@@ -73,7 +65,7 @@ export function ContactSection() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-foreground text-white px-6 py-3.5 text-sm font-bold hover:bg-foreground/90 transition-all"
+                className="w-full rounded-lg bg-foreground text-white px-6 py-3.5 text-sm font-bold hover:bg-foreground/90 transition-all active:scale-[0.98]"
               >
                 Envoyer le message
               </button>
@@ -83,8 +75,7 @@ export function ContactSection() {
               <p className="text-xs text-muted">Réponse garantie sous 24h</p>
               <a
                 href="https://wa.me/22955530826"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 className="text-xs font-semibold text-foreground hover:underline"
               >
                 Ou directement sur WhatsApp →

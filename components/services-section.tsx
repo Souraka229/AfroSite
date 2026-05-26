@@ -39,13 +39,13 @@ export function ServicesSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-xs font-semibold uppercase tracking-widest mb-4" data-animate>
             Services
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl" data-animate data-delay="1">
             Tous types de projets web
           </h2>
-          <p className="mt-5 text-lg text-muted max-w-xl mx-auto">
+          <p className="mt-5 text-lg text-muted max-w-xl mx-auto" data-animate data-delay="2">
             Restaurants, traders, boutiques, entreprises — aucune limite.
           </p>
         </div>
@@ -54,12 +54,14 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group flex flex-col rounded-xl border border-border bg-white p-6 hover:border-foreground/30 hover:shadow-md transition-all duration-200"
+              data-animate="scale"
+              data-delay={String((index % 4) + 1)}
+              className="group flex flex-col rounded-xl border border-border bg-white p-6 hover:border-foreground/30 hover:shadow-md transition-all duration-300"
             >
               <div className="mb-3 text-xs font-semibold text-muted uppercase tracking-widest">
                 {String(index + 1).padStart(2, "0")}
               </div>
-              <h3 className="text-sm font-bold text-foreground mb-2">{service.title}</h3>
+              <h3 className="text-sm font-bold text-foreground mb-2 group-hover:text-accent transition-colors">{service.title}</h3>
               <p className="text-sm text-muted leading-relaxed flex-1">{service.description}</p>
             </div>
           ))}
